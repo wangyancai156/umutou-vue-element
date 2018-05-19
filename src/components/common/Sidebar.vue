@@ -30,7 +30,12 @@
             return {
                 collapse: false,
                 items: [
-                     {
+                    {
+                        icon: 'el-icon-setting',
+                        index: 'organization',
+                        title: '组织架构'
+                    },
+                    {
                         icon: 'el-icon-setting',
                         index: 'inoutbound',
                         title: '库存系统'
