@@ -8,6 +8,13 @@ const home = r => require.ensure([], () => r(require('@/components/common/Home')
 const inoutbound = r => require.ensure([], () => r(require('@/components/page/bw/InOutBound')), 'inoutbound');
 const organization = r => require.ensure([], () => r(require('@/page/hr/organization/Organization')), 'organization');
 const addorganization = r => require.ensure([], () => r(require('@/page/hr/organization/AddOrganization')), 'addorganization');
+const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
+const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
+const rights = r => require.ensure([], () => r(require('@/page/hr/rights/Rights')), 'rights');
+const addrights = r => require.ensure([], () => r(require('@/page/hr/rights/AddRights')), 'addrights');
+const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'role');
+const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
+
 
 export default new Router({
     routes: [
@@ -36,6 +43,37 @@ export default new Router({
                             path: '/addorganization',
                             component: addorganization,
                             meta: { title: '新建组织' },
+                        },
+                        {
+                            path: '/user',
+                            component: user,
+                            meta: { title: '员工列表' },
+                        },
+                        {
+                            path: '/adduser',
+                            component: adduser,
+                            meta: { title: '新建员工' },
+                        },
+                        {
+                            path: '/rights',
+                            component: rights,
+                            meta: { title: '功能列表' },
+                        },
+                        {
+                            path: '/addrights',
+                            name:'addRights',
+                            component: addrights,
+                            meta: { title: '添加功能' },
+                        },
+                        {
+                            path: '/role',
+                            component: role,
+                            meta: { title: '权限列表' },
+                        },
+                        {
+                            path: '/addrole',
+                            component: addrole,
+                            meta: { title: '添加权限' },
                         },
                         {
                             path: '/dashboard',

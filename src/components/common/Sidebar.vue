@@ -1,5 +1,6 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar" >
+        <el-scrollbar style= "height:100%;">
         <el-menu class="sidebar-el-menu" :default-active="onRoutes" :collapse="collapse" background-color="#324157"
             text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
             <template v-for="item in items">
@@ -20,6 +21,7 @@
                 </template>
             </template>
         </el-menu>
+        </el-scrollbar>
     </div>
 </template>
 
@@ -31,9 +33,31 @@
                 collapse: false,
                 items: [
                     {
-                        icon: 'el-icon-setting',
-                        index: 'organization',
-                        title: '组织架构'
+                        icon: 'el-icon-date',
+                        index: '1',
+                        title: '人事管理系统',
+                        subs: [
+                            {
+                                icon: 'el-icon-setting',
+                                index: 'organization',
+                                title: '组织架构'
+                            },
+                            {
+                                icon: 'el-icon-setting',
+                                index: 'user',
+                                title: '员工列表'
+                            },
+                            {
+                                icon: 'el-icon-setting',
+                                index: 'role',
+                                title: '权限列表'
+                            },
+                            {
+                                icon: 'el-icon-setting',
+                                index: 'rights',
+                                title: '功能列表'
+                            },
+                        ]
                     },
                     {
                         icon: 'el-icon-setting',
