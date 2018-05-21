@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="handle-box">
-            <el-button type="primary" icon="delete" class="handle-del mr10" @click="deleteUser"> 批量删除</el-button>
+            <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteUser"> 批量删除</el-button>
             <el-button type="primary" icon="delete" class="handle-del mr10"><router-link to="addrole" >添加权限</router-link></el-button>  
             <el-select  v-model="search.val" clearable placeholder="请选择部门" class="handle-select mr10" style="width:150px">
                 <el-option v-for="item in search.organization" :key="item.Id" :label="item.Name"  :value="item.Id" ></el-option>
@@ -26,119 +26,118 @@
                 </template>
             </el-table-column>
         </el-table>
-        </div>
     </div>
+     
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            table: [],
-            sels:[],
-            search:{
-                organization:[],
-                val:"", 
-            }
-        };
+  data() {
+    return {
+      table: [],
+      sels: [],
+      search: {
+        organization: [],
+        val: ""
+      }
+    };
+  },
+  mounted() {
+    this.initialization();
+  },
+  methods: {
+
+    initialization() {
+
+      this.getPage();
+      this.getOrganization();
     },
-    mounted() {
-        this.initialization();
+    getPage() {
+      var orgid = this.search.val;
+      if (orgid == "") {
+        orgid = 0;
+      }
+      this.$http
+        .get("/api/Role/GetRoleView", {
+          params: {
+            organizationId: orgid
+          }
+        })
+        .then(res => {
+
+          this.table = res.data;
+        });
     },
-    methods: {
-         
-        initialization() {
+    //获取组织架构
+    getOrganization() {
+      this.$http
+        .get("/api/Organization/GetOrganizationView", {
+          params: {
+            id: 0
+          }
+        })
+        .then(res => {
+          this.search.organization = res.data[0].Child;
+          console.log(res.data[0].Child);
+        });
+    },
+    //获取功能
+    getOrganization() {
+      this.$http
+        .get("/api/Organization/GetOrganizationView", {
+          params: {
+            id: 0
+          }
+        })
+        .then(res => {
+          this.search.organization = res.data[0].Child;
+          console.log(res.data[0].Child);
+        });
+    },
+    //格式化状态
+    stateFormat(row, column) {
+      var state = row[column.property];
+      if (state == 1) {
+        return "有效";
+      } else {
+        return "无效";
+      }
+    },
+    selsChange(sels) {
+        
+      //被选中的行组成数组
+      this.sels = sels;
+    },
+    deleteUser() {
+      var ids = "";
+      this.sels.forEach(element => {
+        ids = ids + element.Id + "|";
+      });
 
-            this.getPage();
-            this.getOrganization();
-        },
-        getPage(){
-            var orgid =this.search.val;
-            if (orgid==""){
-                orgid=0;
-            }
-            this.$http
-            .get("/api/Role/GetRoleView", {
-               params: {
-                    organizationId: orgid
-                }
-            })
-            .then(res => {
+      ids = ids.substring(0, ids.length - 1);
+      console.log(ids);
 
-                this.table = res.data;  
-            });
-        },
-        //获取组织架构
-        getOrganization(){
-            this.$http
-            .get("/api/Organization/GetOrganizationView", {
-                params: {
-                    id: 0
-                }
-            })
-            .then(res => {
-                this.search.organization = res.data[0].Child; 
-                console.log( res.data[0].Child ); 
-            });
-        },
-        //获取功能
-        getOrganization(){
-            this.$http
-            .get("/api/Organization/GetOrganizationView", {
-                params: {
-                    id: 0
-                }
-            })
-            .then(res => {
-                this.search.organization = res.data[0].Child; 
-                console.log( res.data[0].Child ); 
-            });
-        },
-        //格式化状态
-        stateFormat(row, column){
-            var state = row[column.property];
-            if(state==1){
-                return "有效";
-            }else{
-                return "无效";
-            }
-        },
-        selsChange(sels) { 
-            
-            //被选中的行组成数组 
-            this.sels = sels;   
-        },
-        deleteUser (){
-           
-            var ids="";
-            this.sels.forEach(element => {
-                ids = ids + element.Id+"|";
-            });
-
-            ids = ids.substring(0,ids.length-1);
-            console.log( ids ); 
-
-            this.$http
-            .get("/api/Role/DeleteRole", {
-                params: {
-                    id:ids
-                }
-            })
-            .then(res => {
-                this.getPage();
-            });
-        }
+      this.$http
+        .get("/api/Role/DeleteRole", {
+          params: {
+            id: ids
+          }
+        })
+        .then(res => {
+          this.getPage();
+        });
     }
+  }
 };
 </script>
 
 
 <style>
 .el-table .warning-row {
-    background: oldlace;
+  background: oldlace;
 }
 
 .el-table .success-row {
-    background: #f0f9eb;
+  background: #f0f9eb;
 }
 </style>

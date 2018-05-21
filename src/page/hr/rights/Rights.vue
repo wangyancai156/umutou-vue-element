@@ -25,100 +25,93 @@
                 </template>
             </el-table-column>
         </el-table>
-        </div>
     </div>
+    
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            id:0,
-            parentId: -1,
-            inquireParent:false,
-            table: [],
-            sels:[],
-        };
+  data() {
+    return {
+      id: 0,
+      parentId: -1,
+      inquireParent: false,
+      table: [],
+      sels: []
+    };
+  },
+  mounted() {
+    this.initialization();
+  },
+  methods: {
+    initialization() {
+      this.$http
+        .get("/api/Rights/GetRightsView", {
+          params: {
+            id: this.id
+          }
+        })
+        .then(res => {
+          this.table = res.data[0].Child;
+          if (res.data.length > 0 && res.data[0].Child.length != 0) {
+            this.parentId = res.data[0].ParentId;
+          }
+        });
     },
-    mounted() {
-        this.initialization();
+    inquireChildNode(row) {
+      this.parentId = this.id;
+      this.id = row.Id;
+      this.initialization();
+      if (this.id == 0) {
+        this.inquireParent = false;
+      } else {
+        this.inquireParent = true;
+      }
+      console.log(this.parentId);
+      console.log(this.id);
     },
-    methods: {
-         
-        initialization() {
-            this.$http
-            .get("/api/Rights/GetRightsView", {
-               params: {
-                    id: this.id
-                }
-            })
-            .then(res => {
+    inquireParentNode() {
+      this.id = this.parentId;
+      this.initialization();
+      if (this.parentId == 0) {
+        this.inquireParent = false;
+      } else {
+        this.inquireParent = true;
+      }
+      console.log(this.parentId);
+      console.log(this.id);
+    },
+    selsChange(sels) {
+      //被选中的行组成数组
+      this.sels = sels;
+    },
+    deleteNode() {
+      var ids = "";
+      this.sels.forEach(element => {
+        ids = ids + "|" + element.Id;
+      });
 
-                this.table = res.data[0].Child;  
-                if(  res.data.length > 0 &&  res.data[0].Child.length != 0 ){
-                    this.parentId = res.data[0].ParentId;
-                }   
-            });
-        },
-        inquireChildNode (row){
-
-            this.parentId = this.id;
-            this.id = row.Id;
-            this.initialization();
-            if( this.id == 0 ){
-                this.inquireParent = false;
-            }else{
-                this.inquireParent = true;
-            }
-            console.log(this.parentId);
-            console.log(this.id);
-        },
-        inquireParentNode (){
-
-            this.id = this.parentId
-            this.initialization();
-            if( this.parentId == 0 ){
-                this.inquireParent = false;
-            }else{
-                this.inquireParent = true;
-            }
-            console.log(this.parentId);
-            console.log(this.id);
-        },
-        selsChange(sels) { 
-            
-            //被选中的行组成数组 
-            this.sels = sels;
-            
-        },
-        deleteNode (){
-           
-           var ids="";
-           this.sels.forEach(element => {
-               ids = ids +"|"+ element.Id;
-           });
-
-            this.$http
-            .get("/api/Organization/DeleteOrganization", {
-                params: {
-                    id:ids
-                }
-            })
-            .then(res => {
-                this.initialization();
-            });
-        }
+      this.$http
+        .get("/api/Organization/DeleteOrganization", {
+          params: {
+            id: ids
+          }
+        })
+        .then(res => {
+          this.initialization();
+        });
     }
+  }
 };
 </script>
 
 
 <style>
 .el-table .warning-row {
-    background: oldlace;
+  background: oldlace;
 }
 
 .el-table .success-row {
-    background: #f0f9eb;
+  background: #f0f9eb;
 }
 </style>

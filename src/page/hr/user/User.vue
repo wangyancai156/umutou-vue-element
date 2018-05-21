@@ -1,7 +1,7 @@
 <template>
     <div class="container"> 
         <div class="handle-box">
-            <el-button type="primary" icon="delete" class="handle-del mr10" @click="deleteuser()"> 批量删除</el-button>
+            <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteuser()"> 批量删除</el-button>
             <el-button type="primary" icon="delete" class="handle-del mr10"><router-link to="adduser" >添加员工</router-link></el-button>  
             <el-select  v-model="search.org" clearable placeholder="请选择部门" class="handle-select mr10" style="width:150px">
                 <el-option-group v-for="gtoup in search.organization" :key="gtoup.id" :label="gtoup.text">
@@ -33,8 +33,8 @@
                 </template>
             </el-table-column>
         </el-table>
-        </div>
     </div>
+
 </template>
 
 <script>
