@@ -25,7 +25,7 @@ export default new Router({
                 {
                     //地址为空时跳转inoutbound页面
                     path: '/',
-                    redirect: '/inoutbound'
+                    redirect: '/organization'
                 },
                 {
                     //home包含页面格局，所有的业务操作都在这里处理

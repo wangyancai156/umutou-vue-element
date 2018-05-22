@@ -7,11 +7,13 @@ import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 import "babel-polyfill";
 import Axios from 'axios';
 import VueAxios from 'vue-axios';
+import apiConfig from '../config/api.config'
 
 Vue.use(VueAxios,Axios);
 Vue.use(VueRouter);
 Vue.use(ElementUI, { size: 'small' });
 //Vue.prototype.$axios = axios;
+Axios.defaults.baseURL = apiConfig.baseUrl;
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
