@@ -31,29 +31,30 @@
         data: function(){
             return {
                 form: {
-                    Id:'',
-                    ParentId:this.$route.params.parentId,
-                    Name:'',
-                    Url:'',                 
-                    IsShow:'',
-                    Descriptin:'',
+                    
+                    Id:this.$route.query.model.Id,
+                    Name:this.$route.query.model.Name,
+                    Url:this.$route.query.model.Url,                   
+                    IsShow:this.$route.query.model.IsShow,
+                    Descriptin:this.$route.query.model.Descriptin,
+                    ParentId:this.$route.query.model.ParentId,              
                 }
             }
         },
         mounted(){
-              console.log(this.$route.params);
+              console.log(this.$route.query.model);
         },
         methods: {
             onSubmit() {
                 this.$http
-                .get("/api/Rights/AddRights", {
+                .get("/api/Rights/EditRights", {
                     params: {  
-                        Id:'',
-                        ParentId:this.form.parentId,
-                        Name:this.form.name,
-                        Url:this.form.url,
-                        IsShow: this.form.isShow,
-                        Description:this.form.description,
+                        Id:this.form.Id,
+                        ParentId:this.form.ParentId,
+                        Name:this.form.Name,
+                        Url:this.form.Url,
+                        IsShow: this.form.IsShow,
+                        Description:this.form.Descriptin,
                     }
                 })
                 .then(res => {

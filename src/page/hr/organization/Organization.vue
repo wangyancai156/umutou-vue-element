@@ -12,11 +12,11 @@
             </el-table-column>
             <el-table-column prop="Name" label="部门名称" >
             </el-table-column>
-            <el-table-column prop="Descriptin" label="说明">
+            <el-table-column prop="Description" label="说明">
             </el-table-column>
             <el-table-column  label="操作">
                 <template slot-scope="scope">
-                    <el-button size="small"  >编辑</el-button>
+                    <el-button size="small" @click="edit(scope.row)"  >编辑</el-button>
                     <el-button size="small" type="primary" @click="inquireChildNode(scope.row)">查看組</el-button>
                 </template>
             </el-table-column>
@@ -73,6 +73,14 @@ export default {
       }
       console.log(this.parentId);
       console.log(this.id);
+    },
+    edit(row){
+         this.$router.push({
+            path: '/editorganization',
+            query: {
+            model: row
+          }
+        })
     },
     selsChange(sels) {
       //被选中的行组成数组

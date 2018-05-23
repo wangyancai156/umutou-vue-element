@@ -8,10 +8,13 @@ const home = r => require.ensure([], () => r(require('@/components/common/Home')
 const inoutbound = r => require.ensure([], () => r(require('@/components/page/bw/InOutBound')), 'inoutbound');
 const organization = r => require.ensure([], () => r(require('@/page/hr/organization/Organization')), 'organization');
 const addorganization = r => require.ensure([], () => r(require('@/page/hr/organization/AddOrganization')), 'addorganization');
+const editorganization = r => require.ensure([], () => r(require('@/page/hr/organization/EditorOrganization')), 'editorganization');
+
 const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
 const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
 const rights = r => require.ensure([], () => r(require('@/page/hr/rights/Rights')), 'rights');
 const addrights = r => require.ensure([], () => r(require('@/page/hr/rights/AddRights')), 'addrights');
+const editrights = r => require.ensure([], () => r(require('@/page/hr/rights/EditRights')), 'editrights');
 const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'role');
 const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
 
@@ -45,6 +48,11 @@ export default new Router({
                             meta: { title: '新建组织' },
                         },
                         {
+                            path: '/editorganization',
+                            component: editorganization,
+                            meta: { title: '编辑组织' },
+                        },
+                        {
                             path: '/user',
                             component: user,
                             meta: { title: '员工列表' },
@@ -64,6 +72,12 @@ export default new Router({
                             name:'addRights',
                             component: addrights,
                             meta: { title: '添加功能' },
+                        },
+                        {
+                            path: '/editrights',
+                            name:'editrights',
+                            component: editrights,
+                            meta: { title: '编辑功能' },
                         },
                         {
                             path: '/role',
