@@ -35,7 +35,7 @@ export default {
       sels: []
     };
   },
-  mounted() {
+  activated() {
     this.initialization();
   },
   methods: {

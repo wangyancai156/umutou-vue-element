@@ -13,7 +13,7 @@
                         <el-switch v-model="form.IsShow"></el-switch>
                     </el-form-item>
                     <el-form-item label="说明">
-                        <el-input type="textarea" rows="5" v-model="form.Descriptin"></el-input>
+                        <el-input type="textarea" rows="5" v-model="form.Description"></el-input>
                     </el-form-item>
                      <el-form-item>
                         <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -36,12 +36,12 @@
                     Name:this.$route.query.model.Name,
                     Url:this.$route.query.model.Url,                   
                     IsShow:this.$route.query.model.IsShow,
-                    Descriptin:this.$route.query.model.Descriptin,
+                    Description:this.$route.query.model.Description,
                     ParentId:this.$route.query.model.ParentId,              
                 }
             }
         },
-        mounted(){
+        activated(){
               console.log(this.$route.query.model);
         },
         methods: {

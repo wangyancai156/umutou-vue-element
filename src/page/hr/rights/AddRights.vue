@@ -13,7 +13,7 @@
                         <el-switch v-model="form.IsShow"></el-switch>
                     </el-form-item>
                     <el-form-item label="说明">
-                        <el-input type="textarea" rows="5" v-model="form.Descriptin"></el-input>
+                        <el-input type="textarea" rows="5" v-model="form.Description"></el-input>
                     </el-form-item>
                      <el-form-item>
                         <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -32,16 +32,17 @@
             return {
                 form: {
                     Id:'',
-                    ParentId:this.$route.params.parentId,
+                    ParentId:this.$route.query.parentId,
                     Name:'',
                     Url:'',                 
                     IsShow:'',
-                    Descriptin:'',
+                    Description:'',
                 }
             }
         },
-        mounted(){
-              console.log(this.$route.params);
+        activated(){
+            this.form.ParentId = this.$route.query.parentId;
+            console.log(this.$route.query);
         },
         methods: {
             onSubmit() {
@@ -49,11 +50,11 @@
                 .get("/api/Rights/AddRights", {
                     params: {  
                         Id:'',
-                        ParentId:this.form.parentId,
-                        Name:this.form.name,
-                        Url:this.form.url,
-                        IsShow: this.form.isShow,
-                        Description:this.form.description,
+                        ParentId:this.form.ParentId,
+                        Name:this.form.Name,
+                        Url:this.form.Url,
+                        IsShow: this.form.IsShow,
+                        Description:this.form.Description,
                     }
                 })
                 .then(res => {

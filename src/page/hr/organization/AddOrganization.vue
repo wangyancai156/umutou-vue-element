@@ -28,11 +28,15 @@
         data: function(){
             return {
                 form: {
-                    parentId: this.$route.params.parentid,
+                    parentId:'',
                     name: '',
                     description: '',
                 }
             }
+        },
+        activated(){
+            this.form.parentId = this.$route.params.parentid;
+            console.log(this.form.parentId );
         },
         methods: {
             onSubmit() {

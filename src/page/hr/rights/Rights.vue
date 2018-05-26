@@ -3,7 +3,7 @@
         <div class="handle-box">
             <el-button v-if="inquireParent" type="primary" icon="el-icon-back"  @click="inquireParentNode()" class="handle-del mr10" >返回上一级</el-button>
             <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteNode()"> 批量删除</el-button>
-            <el-button type="primary" icon="delete" class="handle-del mr10"><router-link :to="{name: 'addRights', params: { parentId:this.id } }" >添加功能</router-link></el-button>
+            <el-button type="primary" icon="delete" class="handle-del mr10" @click="add"> 添加功能 </el-button>
         </div>
         <el-table ref="list" @selection-change="selsChange"  :data="table" style="width: 100%; " >
             <el-table-column type="selection"  >
@@ -16,7 +16,7 @@
             </el-table-column>
             <el-table-column prop="CreateDate" label="添加时间">
             </el-table-column>
-            <el-table-column prop="Descriptin" label="说明">
+            <el-table-column prop="Description" label="说明">
             </el-table-column>
             <el-table-column  label="操作">
                 <template slot-scope="scope">
@@ -40,7 +40,7 @@ export default {
       sels: []
     };
   },
-  mounted() {
+  activated() {
     this.initialization();
   },
   methods: {
@@ -58,13 +58,13 @@ export default {
           }
         });
     },
+    add(){
+
+       this.$router.push({ path: '/addrights',query: {parentId: this.id }});
+    },
     edit(row){
-         this.$router.push({
-            path: '/editrights',
-            query: {
-            model: row
-          }
-        })
+
+         this.$router.push({path: '/editrights', query: { model: row }});
     },
     inquireChildNode(row) {
       this.parentId = this.id;
