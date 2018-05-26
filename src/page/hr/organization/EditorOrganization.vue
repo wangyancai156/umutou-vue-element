@@ -21,37 +21,39 @@
 </template>
 
 <script>
-    export default {
-        data: function(){
-            return {
-                form: {
-                    Id:this.$route.query.model.Id,
-                    ParentId: this.$route.params.ParentId,
-                    Name:this.$route.query.model.Name,
-                    Description: this.$route.query.model.Description,
-                }
-            }
-        },
-        mounted(){
-              console.log(this.$route.query.model);
-        },
-        methods: {
-            onSubmit() {
-                this.$http
-                .get("/api/Organization/EditorOrganization", {
-                params: {  
-                        Id:this.form.Id,
-                        ParentId:this.form.ParentId,
-                        Name:this.form.Name,
-                        Description:this.form.Description,
-                        }
-                })
-                .then(res => {
-                  
-                     this.$router.push('organization');
-                });
-           }
-
-        }
+export default {
+  data: function() {
+    return {
+      form: {
+        Id: "",
+        ParentId: "",
+        Name: "",
+        Description: ""
+      }
+    };
+  },
+  activated() {
+    this.form.Id = this.$route.query.model.Id;
+    this.form.ParentId = this.$route.params.ParentId;
+    this.form.Name = this.$route.query.model.Name;
+    this.form.Description = this.$route.query.model.Description;
+    console.log(this.$route.query.model);
+  },
+  methods: {
+    onSubmit() {
+      this.$http
+        .get("/api/Organization/UpdateOrganization", {
+          params: {
+            Id: this.form.Id,
+            ParentId: this.form.ParentId,
+            Name: this.form.Name,
+            Description: this.form.Description
+          }
+        })
+        .then(res => {
+          this.$router.push("organization");
+        });
     }
+  }
+};
 </script>

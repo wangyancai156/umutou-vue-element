@@ -6,17 +6,23 @@ Vue.use(Router);
 
 const home = r => require.ensure([], () => r(require('@/components/common/Home')), 'home');
 const inoutbound = r => require.ensure([], () => r(require('@/components/page/bw/InOutBound')), 'inoutbound');
+
 const organization = r => require.ensure([], () => r(require('@/page/hr/organization/Organization')), 'organization');
 const addorganization = r => require.ensure([], () => r(require('@/page/hr/organization/AddOrganization')), 'addorganization');
 const editorganization = r => require.ensure([], () => r(require('@/page/hr/organization/EditorOrganization')), 'editorganization');
 
-const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
-const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
+const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'role');
+const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
+const editrole = r => require.ensure([], () => r(require('@/page/hr/role/EditRole')), 'editrole');
+const relationrights = r => require.ensure([], () => r(require('@/page/hr/role/RelationRights')), 'relationrights');
+
 const rights = r => require.ensure([], () => r(require('@/page/hr/rights/Rights')), 'rights');
 const addrights = r => require.ensure([], () => r(require('@/page/hr/rights/AddRights')), 'addrights');
 const editrights = r => require.ensure([], () => r(require('@/page/hr/rights/EditRights')), 'editrights');
-const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'role');
-const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
+
+const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
+const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
+
 
 
 export default new Router({
@@ -88,6 +94,16 @@ export default new Router({
                             path: '/addrole',
                             component: addrole,
                             meta: { title: '添加权限' },
+                        },
+                        {
+                          path: '/editrole',
+                          component: editrole,
+                          meta: { title: '编辑权限' },
+                        },
+                        {
+                          path: '/relationrights',
+                          component: relationrights,
+                          meta: { title: '关联功能' },
                         },
                         {
                             path: '/dashboard',

@@ -3,14 +3,11 @@
         <div class="container">
             <div class="form-box">
                 <el-form ref="form" :model="form" label-width="80px">
-                     <el-form-item label="名称">
-                        <el-input v-model="form.parentId"></el-input>
-                    </el-form-item>
                     <el-form-item label="名称">
-                        <el-input v-model="form.name"></el-input>
+                        <el-input v-model="form.Name"></el-input>
                     </el-form-item>
                     <el-form-item label="说明">
-                        <el-input type="textarea" rows="5" v-model="form.description"></el-input>
+                        <el-input type="textarea" rows="5" v-model="form.Description"></el-input>
                     </el-form-item>
                      <el-form-item>
                         <el-button type="primary" @click="onSubmit">提交</el-button>
@@ -28,24 +25,24 @@
         data: function(){
             return {
                 form: {
-                    parentId:'',
-                    name: '',
-                    description: '',
+                    ParentId:'',
+                    Name: '',
+                    Description: '',
                 }
             }
         },
         activated(){
-            this.form.parentId = this.$route.params.parentid;
-            console.log(this.form.parentId );
+            this.form.ParentId = this.$route.query.parentid;
+            console.log( this.$route.query );
         },
         methods: {
             onSubmit() {
                 this.$http
                 .get("/api/Organization/AddOrganization", {
                 params: {  
-                        parentId:this.form.parentId,
-                        name:this.form.name,
-                        description:this.form.description,
+                        ParentId:this.form.ParentId,
+                        Name:this.form.Name,
+                        Description:this.form.Description,
                         }
                 })
                 .then(res => {

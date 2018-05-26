@@ -32,7 +32,7 @@
             return {
                 form: {
                     Id:'',
-                    ParentId:this.$route.query.parentId,
+                    ParentId:'',
                     Name:'',
                     Url:'',                 
                     IsShow:'',

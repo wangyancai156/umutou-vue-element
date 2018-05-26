@@ -1,8 +1,8 @@
 <template>
     <div class="container">
       <div class="handle-box">
-            <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteUser"> 批量删除</el-button>
-            <el-button type="primary" icon="delete" class="handle-del mr10"><router-link to="addrole" >添加权限</router-link></el-button>  
+            <el-button type="danger" icon="delete" class="handle-del mr10" @click="deletemodel"> 批量删除</el-button>
+            <el-button type="primary" icon="delete" class="handle-del mr10" @click="add"> 添加权限 </el-button>  
             <el-select  v-model="search.val" clearable placeholder="请选择部门" class="handle-select mr10" style="width:150px">
                 <el-option v-for="item in search.organization" :key="item.Id" :label="item.Name"  :value="item.Id" ></el-option>
             </el-select>
@@ -11,9 +11,9 @@
         <el-table ref="list" @selection-change="selsChange"  :data="table" style="width: 100%; " >
             <el-table-column type="selection"  >
             </el-table-column>
-            <el-table-column prop="Name" label="组织名称" style="withd:100px;" >
+            <el-table-column prop="OrganizationName" label="组织名称"  >
             </el-table-column>
-            <el-table-column prop="Name" label="名称" style="withd:100px;" >
+            <el-table-column prop="Name" label="名称"   >
             </el-table-column>
             <el-table-column prop="IsValid" label="状态"  :formatter="stateFormat" > >
             </el-table-column>
@@ -21,8 +21,8 @@
             </el-table-column>
             <el-table-column  label="操作">
                 <template slot-scope="scope">
-                    <el-button size="small"  >编辑</el-button>
-                    <el-button size="small"  >添加功能</el-button>
+                    <el-button size="small" @click="edit(scope.row)" >编辑</el-button>
+                    <el-button size="small" @click="relationrights(scope.row)"  >添加功能</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -42,13 +42,11 @@ export default {
       }
     };
   },
-  mounted() {
+  activated() {
     this.initialization();
   },
   methods: {
-
     initialization() {
-
       this.getPage();
       this.getOrganization();
     },
@@ -64,24 +62,11 @@ export default {
           }
         })
         .then(res => {
-
           this.table = res.data;
         });
+      console.log(this.table);
     },
     //获取组织架构
-    getOrganization() {
-      this.$http
-        .get("/api/Organization/GetOrganizationView", {
-          params: {
-            id: 0
-          }
-        })
-        .then(res => {
-          this.search.organization = res.data[0].Child;
-          console.log(res.data[0].Child);
-        });
-    },
-    //获取功能
     getOrganization() {
       this.$http
         .get("/api/Organization/GetOrganizationView", {
@@ -104,11 +89,16 @@ export default {
       }
     },
     selsChange(sels) {
-        
       //被选中的行组成数组
       this.sels = sels;
     },
-    deleteUser() {
+    add() {
+      this.$router.push({ path: "/addrole", query: { parentId: this.id } });
+    },
+    edit(row) {
+      this.$router.push({ path: "/editrole", query: { model: row } });
+    },
+    deletemodel() {
       var ids = "";
       this.sels.forEach(element => {
         ids = ids + element.Id + "|";
@@ -126,7 +116,11 @@ export default {
         .then(res => {
           this.getPage();
         });
+    },
+    relationrights(row){
+      this.$router.push({ path: "/relationrights", query: { parentId: row.Id } });
     }
+
   }
 };
 </script>

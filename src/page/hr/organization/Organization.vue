@@ -22,7 +22,7 @@
             </el-table-column>
         </el-table>
     </div>
-</template>
+</template> 
 
 <script>
 export default {
@@ -74,20 +74,20 @@ export default {
       console.log(this.parentId);
       console.log(this.id);
     },
-    edit(row){
-         this.$router.push({
-            path: '/editorganization',
-            query: {
-            model: row
-          }
-        })
+    edit(row) {
+      this.$router.push({
+        path: "/editorganization",
+        query: {
+        model: row
+        }
+      });
     },
     selsChange(sels) {
       //被选中的行组成数组
       this.sels = sels;
     },
     addNode() {
-      this.$router.push({ path: "addorganization", params: { parentid: "1" } });
+      this.$router.push({ path: "addorganization", query: { parentid: this.id} });
     },
     deleteNode() {
       var ids = "";

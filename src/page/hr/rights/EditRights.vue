@@ -27,42 +27,45 @@
 </template>
 
 <script>
-    export default {
-        data: function(){
-            return {
-                form: {
-                    
-                    Id:this.$route.query.model.Id,
-                    Name:this.$route.query.model.Name,
-                    Url:this.$route.query.model.Url,                   
-                    IsShow:this.$route.query.model.IsShow,
-                    Description:this.$route.query.model.Description,
-                    ParentId:this.$route.query.model.ParentId,              
-                }
-            }
-        },
-        activated(){
-              console.log(this.$route.query.model);
-        },
-        methods: {
-            onSubmit() {
-                this.$http
-                .get("/api/Rights/EditRights", {
-                    params: {  
-                        Id:this.form.Id,
-                        ParentId:this.form.ParentId,
-                        Name:this.form.Name,
-                        Url:this.form.Url,
-                        IsShow: this.form.IsShow,
-                        Description:this.form.Descriptin,
-                    }
-                })
-                .then(res => {
-                  
-                     this.$router.push('Rights');
-                });
-           }
-
-        }
+export default {
+  data: function() {
+    return {
+      form: {
+        Id: "",
+        Name: "",
+        Url: "",
+        IsShow: "",
+        Description: "",
+        ParentId: ""
+      }
+    };
+  },
+  activated() {
+    this.form.Id = this.$route.query.model.Id;
+    this.form.Name = this.$route.query.model.Name;
+    this.form.Url = this.$route.query.model.Url;
+    this.form.IsShow = this.$route.query.model.IsShow;
+    this.form.Description = this.$route.query.model.Description;
+    this.form.ParentId = this.$route.query.model.ParentId;
+    console.log(this.$route.query.model);
+  },
+  methods: {
+    onSubmit() {
+      this.$http
+        .get("/api/Rights/UpdateRights", {
+          params: {
+            Id: this.form.Id,
+            ParentId: this.form.ParentId,
+            Name: this.form.Name,
+            Url: this.form.Url,
+            IsShow: this.form.IsShow,
+            Description: this.form.Description
+          }
+        })
+        .then(res => {
+          this.$router.push("Rights");
+        });
     }
+  }
+};
 </script>
