@@ -15,6 +15,8 @@ const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'r
 const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
 const editrole = r => require.ensure([], () => r(require('@/page/hr/role/EditRole')), 'editrole');
 const relationrights = r => require.ensure([], () => r(require('@/page/hr/role/RelationRights')), 'relationrights');
+const addrelationrights = r => require.ensure([], () => r(require('@/page/hr/role/AddRelationRights')), 'addrelationrights');
+
 
 const rights = r => require.ensure([], () => r(require('@/page/hr/rights/Rights')), 'rights');
 const addrights = r => require.ensure([], () => r(require('@/page/hr/rights/AddRights')), 'addrights');
@@ -44,7 +46,7 @@ export default new Router({
                     children: [
                         {
                             path: '/organization',
-                            name:organization,
+                            name: organization,
                             component: organization,
                             meta: { title: '组织架构' },
                         },
@@ -75,13 +77,13 @@ export default new Router({
                         },
                         {
                             path: '/addrights',
-                            name:'addRights',
+                            name: 'addRights',
                             component: addrights,
                             meta: { title: '添加功能' },
                         },
                         {
                             path: '/editrights',
-                            name:'editrights',
+                            name: 'editrights',
                             component: editrights,
                             meta: { title: '编辑功能' },
                         },
@@ -96,14 +98,19 @@ export default new Router({
                             meta: { title: '添加权限' },
                         },
                         {
-                          path: '/editrole',
-                          component: editrole,
-                          meta: { title: '编辑权限' },
+                            path: '/editrole',
+                            component: editrole,
+                            meta: { title: '编辑权限' },
                         },
                         {
-                          path: '/relationrights',
-                          component: relationrights,
-                          meta: { title: '关联功能' },
+                            path: '/relationrights',
+                            component: relationrights,
+                            meta: { title: '岗位功能' },
+                        },
+                        {
+                            path: '/addrelationrights',
+                            component: addrelationrights,
+                            meta: { title: '关联功能' },
                         },
                         {
                             path: '/dashboard',

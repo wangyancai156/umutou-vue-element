@@ -1,93 +1,92 @@
 <template>
-    <div>
-        <div class="container">
-          <div class="handle-box">
-            <el-button type="danger" icon="delete" class="handle-del mr10" >批量取消</el-button>
-            <el-button type="primary" icon="delete" class="handle-del mr10">批量关联</el-button>  
-            <el-cascader :options="options" change-on-select @change="rightsChange" ></el-cascader>
-          </div>
-          <el-table ref="list" @selection-change="selChange"  :data="table" style="width: 100%; " >
-            <el-table-column type="selection"  >
-            </el-table-column>
-            <el-table-column prop="Name" label="名称" >
-            </el-table-column>
-            <el-table-column prop="Level" label="等级">
-            </el-table-column>
-            <el-table-column prop="Url" label="链接">
-            </el-table-column>
-            <el-table-column prop="CreateDate" label="添加时间">
-            </el-table-column>
-            <el-table-column prop="Description" label="说明">
-            </el-table-column>
-        </el-table>
-        </div>
+  <div>
+    <div class="container">
+      <div class="handle-box">
+        <el-button type="danger" icon="delete" class="handle-del mr10" @click="onDisRelation">批量取消</el-button>
+        <el-button type="danger" icon="delete" class="handle-del mr10" @click="add">添加关联</el-button>
+      </div>
+      <el-table @selection-change="selChange" :data="table" style="width: 100%; ">
+        <el-table-column type="selection">
+        </el-table-column>
+        <el-table-column prop="PathName" label="路径">
+        </el-table-column>
+        <el-table-column prop="Name" label="名称">
+        </el-table-column>
+        <el-table-column prop="Level" label="等级">
+        </el-table-column>
+        <el-table-column prop="Description" label="说明">
+        </el-table-column>
+      </el-table>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  data: function() {
-    return {
-      id: "",
-      table: [],
-      options: []
-    };
-  },
+    data: function() {
+        return {
+            Id: "",
+            table: [],
+            selectd: []
+        };
+    },
 
-  activated() {
-    this.initialization();
-  },
-  methods: {
-    //初始化页面
-    initialization() {
-      this.getQuery();
-      this.getRights();
+    activated() {
+        this.initialization();
     },
-    //获取传值
-    getQuery() {
-      this.Id = this.$route.query.parentId;
-      console.log(this.$route.query);
-    },
-    //获取功能
-    getRights() {
-      this.$http
-        .get("/api/Rights/GetRightsTreeView", {
-          params: {
-            id: 0
-          }
-        })
-        .then(res => {
-          this.options = res.data[0].children;
-          console.log(this.options);
-        });
-    },
-    rightsChange(key) {
-      var keyid = key[key.length-1];
-      this.$http
-        .get("/api/Rights/GetRightsView", {
-          params: {
-            id: keyid
-          }
-        })
-        .then(res => {
-          this.table = res.data[0].Child;
-          console.log(this.table);
-        });
-    },
-    //选择
-    selChange(key, type) {},
-    //提交
-    onSubmit() {
-      this.$http
-        .get("/api/Role/AddRole", {
-          params: {
-            Id: ""
-          }
-        })
-        .then(res => {
-          this.$router.push("role");
-        });
+    methods: {
+        //初始化页面
+        initialization() {
+            this.getQuery();
+            this.getRelationRights();
+        },
+        //获取传值
+        getQuery() {
+            this.Id = this.$route.query.parentId;
+            console.log(this.$route.query);
+        },
+        //获取已经关联的功能
+        getRelationRights() {
+            this.$http
+                .get("/api/Role/GetRoleRights", {
+                    params: {
+                        id: this.Id
+                    }
+                })
+                .then(res => {
+                    this.table = res.data;
+                    console.log(this.table);
+                });
+        },
+        //选择
+        selChange(key) {
+            this.selectd = key;
+        },
+        //取消关系
+        onDisRelation() {
+            var ids = "";
+            this.selectd.forEach(element => {
+                ids = ids + "|" + element.Id;
+            });
+
+            ids = ids.substring(1, ids.length);
+            this.$http
+                .get("/api/Role/CancelRelationRigths", {
+                    params: {
+                        roleId: this.Id,
+                        rightid: ids
+                    }
+                })
+                .then(res => {
+                    this.getRelationRights();
+                });
+        },
+        add() {
+            this.$router.push({
+                path: "/addrelationrights",
+                query: { parentId: this.Id }
+            });
+        }
     }
-  }
 };
 </script>

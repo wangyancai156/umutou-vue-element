@@ -52,10 +52,11 @@ export default {
           }
         })
         .then(res => {
-          this.table = res.data[0].Child;
-          if (res.data.length > 0 && res.data[0].Child.length != 0) {
-            this.parentId = res.data[0].ParentId;
-          }
+          console.log(res);
+          this.table = res.data.Child;
+          this.parentId = res.data.ParentId;
+         
+          console.log(this.parentId);
         });
     },
     add(){
