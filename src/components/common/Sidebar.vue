@@ -66,13 +66,35 @@ export default {
           children: [
             {
               icon: "el-icon-setting",
-              index: "inoutbound",
-              title: "待到货管理"
+              index: "spotinventory",
+              title: "现货库存"
             },
             {
               icon: "el-icon-setting",
-              index: "inoutbound",
-              title: "出入库管理"
+              index: "addinbound",
+              title: "添加入库"
+            },
+              {
+              icon: "el-icon-setting",
+              index: "addinbound",
+              title: "待入库"
+            }
+          ]
+        },
+         {
+          icon: "el-icon-setting",
+          index: "2",
+          title: "采购系统",
+          children: [
+            {
+              icon: "el-icon-setting",
+              index: "spotinventory",
+              title: "我的采购单"
+            },
+            {
+              icon: "el-icon-setting",
+              index: "addinbound",
+              title: "采购单审批"
             }
           ]
         },
@@ -83,17 +105,17 @@ export default {
           children: [
             {
               icon: "el-icon-setting",
-              index: "inoutbound",
+              index: "table",
               title: "库房维护"
             },
             {
               icon: "el-icon-setting",
-              index: "inoutbound",
+              index: "table",
               title: "发票类型维护"
             },
             {
               icon: "el-icon-setting",
-              index: "inoutbound",
+              index: "table",
               title: "采购类型维护"
             }
           ]

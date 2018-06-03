@@ -5,7 +5,6 @@ import App from '../App'
 Vue.use(Router);
 
 const home = r => require.ensure([], () => r(require('@/components/common/Home')), 'home');
-const inoutbound = r => require.ensure([], () => r(require('@/components/page/bw/InOutBound')), 'inoutbound');
 
 const organization = r => require.ensure([], () => r(require('@/page/hr/organization/Organization')), 'organization');
 const addorganization = r => require.ensure([], () => r(require('@/page/hr/organization/AddOrganization')), 'addorganization');
@@ -24,6 +23,10 @@ const editrights = r => require.ensure([], () => r(require('@/page/hr/rights/Edi
 
 const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
 const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
+
+const inoutbound = r => require.ensure([], () => r(require('@/page/bw/InOutBound')), 'inoutbound');
+const spotinventory = r => require.ensure([], () => r(require('@/page/bw/SpotInventory')), 'spotinventory');
+const addinbound = r => require.ensure([], () => r(require('@/page/bw/AddInBound')), 'addinbound');
 
 
 
@@ -113,15 +116,20 @@ export default new Router({
                             meta: { title: '关联功能' },
                         },
                         {
+                            path: '/spotinventory',
+                            component: spotinventory,
+                            meta: { title: '现货库存' }
+                        },
+                        {
+                            path: '/addinbound',
+                            component: addinbound,
+                            meta: { title: '添加入库' }
+                        },
+                        {
                             path: '/dashboard',
                             component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                             meta: { title: '系统首页' }
-                        },
-                        {
-                            path: '/inoutbound',
-                            component: inoutbound,
-                            meta: { title: '出入库记录' }
-                        },
+                        }, 
                         {
                             path: '/table',
                             component: resolve => require(['../components/page/BaseTable.vue'], resolve),

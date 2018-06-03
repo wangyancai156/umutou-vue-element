@@ -45,7 +45,6 @@ export default {
         initialization() {
             this.getOrganization();
         },
-
         //获取组织架构
         getOrganization() {
             this.$http
@@ -54,7 +53,6 @@ export default {
                     this.form.organization.data = res.data[0].children;
                 });
         },
-
         oncascaderChang(key) {
             var keyid = key[key.length - 1];
             this.form.organization.val = keyid;
