@@ -74,33 +74,33 @@ export default {
               index: "addinbound",
               title: "添加入库"
             },
-              {
+            {
               icon: "el-icon-setting",
-              index: "addinbound",
+              index: "2222",
               title: "待入库"
-            }
-          ]
-        },
-         {
-          icon: "el-icon-setting",
-          index: "2",
-          title: "采购系统",
-          children: [
-            {
-              icon: "el-icon-setting",
-              index: "spotinventory",
-              title: "我的采购单"
-            },
-            {
-              icon: "el-icon-setting",
-              index: "addinbound",
-              title: "采购单审批"
             }
           ]
         },
         {
           icon: "el-icon-setting",
           index: "3",
+          title: "采购系统",
+          children: [
+            {
+              icon: "el-icon-setting",
+              index: "111",
+              title: "我的采购单"
+            },
+            {
+              icon: "el-icon-setting",
+              index: "1111",
+              title: "采购单审批"
+            }
+          ]
+        },
+        {
+          icon: "el-icon-setting",
+          index: "4",
           title: "系统设置",
           children: [
             {
@@ -137,7 +137,7 @@ export default {
         },
         {
           icon: "el-icon-date",
-          index: "4",
+          index: "5",
           title: "表单相关",
           children: [
             {

@@ -101,7 +101,7 @@ export default {
         },
         getInOutReason() {
             this.$http.get("/api/InOutReason/GetInReason", {}).then(res => {
-                if (es.data.length > 0) {
+                if (res.data.length > 0) {
                     this.InOutReason.data = res.data;
                     this.InOutReason.val = res.data[0].Id;
                 }

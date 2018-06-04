@@ -4,17 +4,17 @@
             <el-button type="primary" icon="delete" class="handle-del mr10" style=" width:80px;">入库</el-button>
         </div>
         <el-table :data="table" style="width: 100%; ">
-            <el-table-column type="selection" width="55">
+            <el-table-column type="selection" style="width: 5%; ">
             </el-table-column>
-            <el-table-column prop="WarehouseName" label="库房">
+            <el-table-column prop="WarehouseName" label="库房"   style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="ProductChineseName" label="产品">
+            <el-table-column prop="ProductChineseName" label="产品"  style="width: 30%; ">
             </el-table-column>
-            <el-table-column prop="Qty" label="数量">
+            <el-table-column prop="Qty" label="数量"  style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="Price" label="单价">
+            <el-table-column prop="Price" label="单价"  style="width: 20%; ">
             </el-table-column>
-            <el-table-column fixed="right" label="操作">
+            <el-table-column   label="操作" style="width: 5%; ">
                 <template slot-scope="scope">
                     <el-button type="text" @click="showAddOutBound(scope.row)" size="small">
                         出库
@@ -28,13 +28,13 @@
         </div>
         <el-dialog title="出库" :visible.sync="dialogVisible" width="30%">
             <el-form ref="form" label-width="80px">
-                <el-form-item label="入库原因">
-                    <el-select v-model="InOutReason.val" clearable placeholder="请选择入库原因" class="handle-select mr10" style="width:200px">
+                <el-form-item label="出库原因">
+                    <el-select v-model="InOutReason.val" clearable placeholder="请选择入库原因" class="handle-select mr10" style=" width:80%;">
                         <el-option v-for="item in InOutReason.data" :key="item.Id" :label="item.Description" :value="item.Id"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="数量">
-                    <el-input v-model="Qty" type="number" style=" width:200px;"></el-input>
+                <el-form-item label="出库数量">
+                    <el-input v-model="Qty" type="number" style=" width:80%;"></el-input>
                 </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
