@@ -28,8 +28,12 @@ const inoutbound = r => require.ensure([], () => r(require('@/page/bw/InOutBound
 const spotinventory = r => require.ensure([], () => r(require('@/page/bw/SpotInventory')), 'spotinventory');
 const addinbound = r => require.ensure([], () => r(require('@/page/bw/AddInBound')), 'addinbound');
 
+const mypurchaseorder = r => require.ensure([], () => r(require('@/page/po/MyPurchaseOrder')), 'mypurchaseorder');
+const addpurchaseorder = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrder')), 'addpurchaseorder');
 
+const approvalpurchaseorder = r => require.ensure([], () => r(require('@/page/po/ApprovalPurchaseOrder')), 'approvalpurchaseorder');
 
+ 
 export default new Router({
     routes: [
         {
@@ -125,6 +129,21 @@ export default new Router({
                             component: addinbound,
                             meta: { title: '添加入库' }
                         },
+                        {
+                            path: '/mypurchaseorder',
+                            component: mypurchaseorder,
+                            meta: { title: '我的采购单' }
+                        },
+                        {
+                            path: '/addpurchaseorder',
+                            component: addpurchaseorder,
+                            meta: { title: '添加采购单' }
+                        },
+                        {
+                            path: '/approvalpurchaseorder',
+                            component: approvalpurchaseorder,
+                            meta: { title: '添加入库' }
+                        },/////////////////////////////////////////
                         {
                             path: '/dashboard',
                             component: resolve => require(['../components/page/Dashboard.vue'], resolve),
