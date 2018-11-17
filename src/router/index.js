@@ -5,32 +5,31 @@ import App from '../App'
 Vue.use(Router);
 
 const home = r => require.ensure([], () => r(require('@/components/common/Home')), 'home');
-
+//组织机构
 const organization = r => require.ensure([], () => r(require('@/page/hr/organization/Organization')), 'organization');
 const addorganization = r => require.ensure([], () => r(require('@/page/hr/organization/AddOrganization')), 'addorganization');
 const editorganization = r => require.ensure([], () => r(require('@/page/hr/organization/EditorOrganization')), 'editorganization');
-
+//岗位
 const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'role');
 const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
 const editrole = r => require.ensure([], () => r(require('@/page/hr/role/EditRole')), 'editrole');
 const relationrights = r => require.ensure([], () => r(require('@/page/hr/role/RelationRights')), 'relationrights');
 const addrelationrights = r => require.ensure([], () => r(require('@/page/hr/role/AddRelationRights')), 'addrelationrights');
-
-
+//权限
 const rights = r => require.ensure([], () => r(require('@/page/hr/rights/Rights')), 'rights');
 const addrights = r => require.ensure([], () => r(require('@/page/hr/rights/AddRights')), 'addrights');
 const editrights = r => require.ensure([], () => r(require('@/page/hr/rights/EditRights')), 'editrights');
-
+//用户
 const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
 const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
-
+//库存
 const inoutbound = r => require.ensure([], () => r(require('@/page/bw/InOutBound')), 'inoutbound');
 const spotinventory = r => require.ensure([], () => r(require('@/page/bw/SpotInventory')), 'spotinventory');
 const addinbound = r => require.ensure([], () => r(require('@/page/bw/AddInBound')), 'addinbound');
-
+//采购
 const mypurchaseorder = r => require.ensure([], () => r(require('@/page/po/MyPurchaseOrder')), 'mypurchaseorder');
 const addpurchaseorder = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrder')), 'addpurchaseorder');
-
+const addpurchaseorderdetail = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrderDetail')), 'addpurchaseorderdetail');
 const approvalpurchaseorder = r => require.ensure([], () => r(require('@/page/po/ApprovalPurchaseOrder')), 'approvalpurchaseorder');
 
  
@@ -140,9 +139,14 @@ export default new Router({
                             meta: { title: '添加采购单' }
                         },
                         {
+                            path: '/addpurchaseorderdetail',
+                            component: addpurchaseorderdetail,
+                            meta: { title: '添加采购明细' }
+                        },
+                        {
                             path: '/approvalpurchaseorder',
                             component: approvalpurchaseorder,
-                            meta: { title: '添加入库' }
+                            meta: { title: '采购审批' }
                         },/////////////////////////////////////////
                         {
                             path: '/dashboard',
