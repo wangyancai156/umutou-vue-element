@@ -1,19 +1,9 @@
 <template>
     <div class="container">
-        <div class="handle-box">
-            <el-button type="danger" icon="delete" class="handle-del mr10" @click="removePurchaseOrder()"> 批量删除</el-button>
-            <el-select v-model="Status.val" filterable placeholder="选择状态" class="handle-select mr10">
-                <el-option v-for="item in Status.data" :key="item.Id" :label="item.text" :value="item.Id"></el-option>
-            </el-select>
-            <el-button type="primary" icon="search" @click="getPurchaseOrderView">搜索</el-button>
-            <el-button type="primary" icon="delete" @click="addPurchaseOrder" class="handle-del mr10">添加采购单</el-button>
-        </div>
-        <el-table :data="table" @selection-change="selsChange" style="width: 100%; ">
+        <el-table :data="table" style="width: 100%; ">
             <el-table-column type="selection" style="width: 5%; ">
             </el-table-column>
-            <el-table-column prop="Id" label="采购编号" style="width: 30%; ">
-            </el-table-column>
-            <el-table-column prop="PurchaseType.Description" label="采购类型" style="width: 15%; ">
+            <el-table-column prop="PurchaseType.Description" label="采购类型" style="width: 20%; ">
             </el-table-column>
             <el-table-column prop="Supplier.Name" label="供应商" style="width: 30%; ">
             </el-table-column>
@@ -26,8 +16,8 @@
             <el-table-column label="操作" style="width: 5%; ">
                 <template slot-scope="scope">
                     <el-button type="text" size="small">
-                        <span @click="addPurchaseOrderDetail(scope.row)"> 明细 </span>
-                        <span @click="purchaseApply(scope.row)"> 提交 </span>
+                        <span @click="onPurchaseApproval(scope.row)"> 批准 </span>
+                        <span @click="onPurchaseReject(scope.row)"> 驳回 </span>
                     </el-button>
                 </template>
             </el-table-column>
@@ -49,14 +39,7 @@ export default {
             PageIndex: 1,
             TotalCount: 0,
             table: [],
-            Status: {
-                val: "PO-010",
-                data: [
-                    { Id: "PO-010", text: "待提交" },
-                    { Id: "PO-020", text: "待审批" },
-                    { Id: "PO-030", text: "待到货" }
-                ]
-            }
+            status: "PO-020"
         };
     },
     activated() {
@@ -80,7 +63,8 @@ export default {
                     params: {
                         PageIndex: this.PageIndex,
                         PageSize: this.Pagesize,
-                        StatuId: this.Status.val
+                        StatuId: this.status,
+                        OperatorId: "W001"
                     }
                 })
                 .then(res => {
@@ -90,52 +74,28 @@ export default {
                     console.log(res.data.EntityList);
                 });
         },
-        selsChange(sels) {
-            //被选中的行组成数组
-            this.sels = sels;
-        },
-        addPurchaseOrder() {
-            this.$router.push("addpurchaseorder");
-        },
-        removePurchaseOrder() {
-            var ids = "";
-            this.sels.forEach(element => {
-                ids = ids + "|" + element.Id;
-            });
+        onPurchaseApproval(row) {
             this.$http
-                .get("/api/PurchaseOrder/RemovePurchaseOrder", {
-                    params: {
-                        id: ids
-                    }
-                })
-                .then(res => {
-                    this.getPurchaseOrderView();
-                });
-        },
-        addPurchaseOrderDetail(row) {
-            this.$router.push({
-                path: "/addpurchaseorderdetail",
-                query: {
-                    model: row
-                }
-            });
-        },
-        purchaseApply(row) {
-            this.$http
-                .get("/api/PurchaseOrder/PurchaseApply", {
+                .get("/api/PurchaseOrder/PurchaseApproval", {
                     params: {
                         id: row.Id,
                         operatorId: "W001"
                     }
                 })
                 .then(res => {
-                    console.log(res.data);
-                    if (res.data == true) {
-                        alert("已提交！");
-                        this.getPurchaseOrderView();
-                    } else {
-                        alert("提交失败！");
+                    this.getPurchaseOrderView();
+                });
+        },
+        onPurchaseReject(row) {
+            this.$http
+                .get("/api/PurchaseOrder/PurchaseReject", {
+                    params: {
+                        id: row.Id,
+                        operatorId: "W001"
                     }
+                })
+                .then(res => {
+                    this.getPurchaseOrderView();
                 });
         },
         dateFormat: function(row, column) {

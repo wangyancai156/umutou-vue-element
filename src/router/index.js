@@ -30,7 +30,7 @@ const addinbound = r => require.ensure([], () => r(require('@/page/bw/AddInBound
 const mypurchaseorder = r => require.ensure([], () => r(require('@/page/po/MyPurchaseOrder')), 'mypurchaseorder');
 const addpurchaseorder = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrder')), 'addpurchaseorder');
 const addpurchaseorderdetail = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrderDetail')), 'addpurchaseorderdetail');
-const approvalpurchaseorder = r => require.ensure([], () => r(require('@/page/po/ApprovalPurchaseOrder')), 'approvalpurchaseorder');
+const approvalpurchase = r => require.ensure([], () => r(require('@/page/po/ApprovalPurchase/ApprovalPurchase')), 'approvalpurchase');
 
  
 export default new Router({
@@ -144,8 +144,8 @@ export default new Router({
                             meta: { title: '添加采购明细' }
                         },
                         {
-                            path: '/approvalpurchaseorder',
-                            component: approvalpurchaseorder,
+                            path: '/approvalpurchase',
+                            component: approvalpurchase,
                             meta: { title: '采购审批' }
                         },/////////////////////////////////////////
                         {

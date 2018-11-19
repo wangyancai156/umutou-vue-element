@@ -94,7 +94,7 @@ export default {
                         },
                         {
                             icon: "el-icon-setting",
-                            index: "approvalpurchaseorder",
+                            index: "approvalpurchase",
                             title: "采购单审批"
                         }
                     ]

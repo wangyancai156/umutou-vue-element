@@ -1,10 +1,11 @@
 <template>
     <div class="container">
-       
-        <el-table :data="table" style="width: 100%; ">
+        <el-table :data="table" @selection-change="selsChange" style="width: 100%; ">
             <el-table-column type="selection" style="width: 5%; ">
             </el-table-column>
-            <el-table-column prop="PurchaseType.Description" label="采购类型" style="width: 20%; ">
+            <el-table-column prop="Id" label="采购编号" style="width: 30%; ">
+            </el-table-column>
+            <el-table-column prop="PurchaseType.Description" label="采购类型" style="width: 15%; ">
             </el-table-column>
             <el-table-column prop="Supplier.Name" label="供应商" style="width: 30%; ">
             </el-table-column>
@@ -17,7 +18,7 @@
             <el-table-column label="操作" style="width: 5%; ">
                 <template slot-scope="scope">
                     <el-button type="text" size="small">
-                        <span> 批准 </span> <span> 驳回 </span>
+                        <span @click="addPurchaseOrderDetail(scope.row)"> 确认到货 </span>
                     </el-button>
                 </template>
             </el-table-column>
@@ -31,15 +32,14 @@
 </template>
 
 <script>
-import { moment  } from "@/components/common/moment.js";
+import { moment } from "@/components/common/moment.js";
 export default {
     data() {
         return {
             Pagesize: 10,
             PageIndex: 1,
             TotalCount: 0,
-            table: [],
-            status: "PO-010"
+            table: []
         };
     },
     activated() {
@@ -47,23 +47,23 @@ export default {
     },
     methods: {
         initialization() {
-            this.getPurchaseOrderView();
+            this.getPurchaseNoticeView();
         },
         handleSizeChange: function(size) {
             this.Pagesize = size;
-            this.getPurchaseOrderView();
+            this.getPurchaseNoticeView();
         },
         handleCurrentChange: function(PageIndex) {
             this.PageIndex = PageIndex;
-            this.getPurchaseOrderView();
+            this.getPurchaseNoticeView();
         },
-        getPurchaseOrderView() {
+        getPurchaseNoticeView() {
             this.$http
                 .get("/api/PurchaseOrder/getPurchaseOrderViewByStatus", {
                     params: {
                         PageIndex: this.PageIndex,
                         PageSize: this.Pagesize,
-                        StatuId: this.status
+                        StatuId: this.Status.val
                     }
                 })
                 .then(res => {
@@ -72,6 +72,10 @@ export default {
                     this.PageIndex = res.data.PageIndex;
                     console.log(res.data.EntityList);
                 });
+        },
+        selsChange(sels) {
+            //被选中的行组成数组
+            this.sels = sels;
         },
         addPurchaseOrder() {
             this.$router.push("addpurchaseorder");

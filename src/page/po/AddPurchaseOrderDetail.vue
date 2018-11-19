@@ -34,6 +34,7 @@
 export default {
     data: function() {
         return {
+            purchaseOrderId:"",
             Product: {
                 data: [],
                 val: ""
@@ -41,7 +42,7 @@ export default {
             Qty: 0,
             Price: 0,
             table: [], //用户数据
-            sels: [], // 选中的数据
+            sels: [] // 选中的数据
         };
     },
     activated() {
@@ -49,8 +50,9 @@ export default {
     },
     methods: {
         initialization() {
+            this.purchaseOrderId = this.$route.query.model.Id;
             this.getProduct();
-            this. getPurchaseOrderDetail();
+            this.getPurchaseOrderDetail();
         },
         getProduct() {
             this.$http.get("/api/Product/GetProductView", {}).then(res => {
@@ -58,12 +60,12 @@ export default {
                 this.Product.val = res.data[0].Id;
                 console.log(res.data);
             });
-        }, 
+        },
         getPurchaseOrderDetail() {
             this.$http
                 .get("/api/PurchaseOrder/GetPurchaseOrderDetailView", {
                     params: {
-                        purchaseOrderId: "PO-20181117-001"
+                        purchaseOrderId:this.purchaseOrderId
                     }
                 })
                 .then(res => {
@@ -79,7 +81,7 @@ export default {
             this.$http
                 .get("/api/PurchaseOrder/AddPurchaseOrderDetail", {
                     params: {
-                        PurchaseOrderId: "PO-20181117-001",
+                        PurchaseOrderId:  this.purchaseOrderId,
                         ProductId: this.Product.val,
                         Qty: this.Qty,
                         UnitPrice: this.Price,
@@ -88,7 +90,7 @@ export default {
                     }
                 })
                 .then(res => {
-                      this. getPurchaseOrderDetail();
+                    this.getPurchaseOrderDetail();
                 });
         },
         onCancel() {
