@@ -17,7 +17,7 @@
             <el-table-column  label="操作">
                 <template slot-scope="scope">
                     <el-button size="small" @click="edit(scope.row)"  >编辑</el-button>
-                    <el-button size="small" type="primary" @click="inquireChildNode(scope.row)">查看組</el-button>
+                    <el-button size="small" type="primary" @click="inquireChildNode(scope.row)">下一级</el-button>
                 </template>
             </el-table-column>
         </el-table>

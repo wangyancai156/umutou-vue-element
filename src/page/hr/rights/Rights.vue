@@ -55,17 +55,15 @@ export default {
           console.log(res);
           this.table = res.data.Child;
           this.parentId = res.data.ParentId;
-         
+
           console.log(this.parentId);
         });
     },
-    add(){
-
-       this.$router.push({ path: '/addrights',query: {parentId: this.id }});
+    add() {
+      this.$router.push({ path: "/addrights", query: { parentId: this.id } });
     },
-    edit(row){
-
-         this.$router.push({path: '/editrights', query: { model: row }});
+    edit(row) {
+      this.$router.push({ path: "/editrights", query: { model: row } });
     },
     inquireChildNode(row) {
       this.parentId = this.id;
