@@ -3,7 +3,7 @@
         <div class="handle-box">
             <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteuser()"> 批量删除</el-button>
             <el-button type="primary" icon="delete" class="handle-del mr10" @click="add" >添加员工</el-button>
-            <el-cascader :options="search.organization" @change="oncascaderChang"></el-cascader>
+            <el-cascader :options="search.organization" @change="onOrganizationChang"></el-cascader>
             <el-input style="width:150px" v-model="search.name" clearable placeholder="姓名"></el-input>
             <el-button type="primary" icon="search" @click="getUserPage">搜索</el-button>
         </div>
@@ -14,13 +14,9 @@
             </el-table-column>
             <el-table-column prop="UserName" label="姓名">
             </el-table-column>
-            <el-table-column prop="OrganizationName" label="部门">
-            </el-table-column>
             <el-table-column prop="Telephone" label="电话">
             </el-table-column>
             <el-table-column prop="SignState" label="状态" :formatter="stateFormat">
-            </el-table-column>
-            <el-table-column prop="LastSignTime" label="最后登陆时间">
             </el-table-column>
             <el-table-column label="操作">
                 <template slot-scope="scope">
@@ -54,7 +50,7 @@ export default {
             this.getOrganization();
             this.getUserPage();
         },
-        oncascaderChang(key) {
+        onOrganizationChang(key) {
             console.log(key);
             var keyid = key[key.length - 1];
             this.search.org = keyid;

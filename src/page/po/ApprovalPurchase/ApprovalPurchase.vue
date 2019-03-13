@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { moment } from "@/components/common/moment.js";
 import vHaveApproval from "./ApprovalPurchaseHave";
 import vWaitApproval from "./ApprovalPurchaseWait";
 

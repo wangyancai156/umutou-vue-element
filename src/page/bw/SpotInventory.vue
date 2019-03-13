@@ -90,8 +90,9 @@ export default {
             this.getSpotInventory();
         },
         getSpotInventory() {
-            this.$http
-                .get("/api/SpotInventory/GetSpotInventory", {
+
+
+        this.$http.get("/api/SpotInventory/GetSpotInventory", {
                     params: {
                         PageIndex: this.PageIndex,
                         PageSize: this.pagesize,

@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { moment } from "@/components/common/moment.js";
 export default {
     data() {
         return {

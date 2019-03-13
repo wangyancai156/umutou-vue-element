@@ -48,7 +48,7 @@ export default {
             .then(res => {
               if (res.data.Result) {
                 localStorage.setItem("ms_username", this.ruleForm.username);
-                localStorage.setItem("ms_userkey", res.data.sessionKey);
+                localStorage.setItem("ms_userkey", res.data.SessionKey);
                 this.$router.push("/");
               }
             });

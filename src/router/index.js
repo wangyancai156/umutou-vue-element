@@ -32,7 +32,7 @@ const addpurchaseorder = r => require.ensure([], () => r(require('@/page/po/AddP
 const addpurchaseorderdetail = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrderDetail')), 'addpurchaseorderdetail');
 const approvalpurchase = r => require.ensure([], () => r(require('@/page/po/ApprovalPurchase/ApprovalPurchase')), 'approvalpurchase');
 
- 
+
 export default new Router({
     routes: [
         {
@@ -54,7 +54,7 @@ export default new Router({
                             path: '/organization',
                             name: organization,
                             component: organization,
-                            meta: { title: '组织架构' },
+                            meta: { title: '组织架构' }
                         },
                         {
                             path: '/addorganization',
@@ -152,7 +152,7 @@ export default new Router({
                             path: '/dashboard',
                             component: resolve => require(['../components/page/Dashboard.vue'], resolve),
                             meta: { title: '系统首页' }
-                        }, 
+                        },
                         {
                             path: '/table',
                             component: resolve => require(['../components/page/BaseTable.vue'], resolve),

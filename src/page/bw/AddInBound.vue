@@ -74,7 +74,7 @@ export default {
             this.getProduct();
         },
         getWarehouse() {
-            this.$http.get("/api/Warehouse/GetWarehouse", {}).then(res => {
+            this.$http.get("/api/Warehouse/GetWarehouse", {SessionKey:"N001",UserId:"N001"}).then(res => {
                 this.Warehouse.data = res.data;
                 this.Warehouse.val = res.data[0].Id;
                 console.log(res.data[0].Id);
