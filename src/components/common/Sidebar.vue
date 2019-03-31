@@ -29,10 +29,11 @@
 <script>
 import bus from "../common/bus";
 export default {
-    data() {
+     
+    data: function() {
         return {
             collapse: false,
-            items: [
+             items: [
                 {
                     icon: "el-icon-date",
                     index: "1",
@@ -192,6 +193,28 @@ export default {
         bus.$on("collapse", msg => {
             this.collapse = msg;
         });
+         this.initialization();
+    },
+    methods: {
+
+        initialization(){
+             this.getMenu();
+        },
+        getMenu(){
+            this.$http
+            .get("/api/Rights/GetMenuView", {
+                params: {
+                    userId: "W005"
+                }
+            })
+            .then(res => {
+                 this.items.length = 0;
+                this.items =  res.data[0].children;
+                console.log("菜单");
+                console.log(res.data[0].children);
+                console.log(this.items);
+            });
+        }
     }
 };
 </script>
