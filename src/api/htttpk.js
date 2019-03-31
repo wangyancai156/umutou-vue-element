@@ -4,22 +4,29 @@ import Qs from 'qs';
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = apiConfig.baseUrl;
-const username = localStorage.getItem('ms_username');
-const userkey = localStorage.getItem('ms_userkey');
 
 //http request 拦截器
 axios.interceptors.request.use(
+ 
   config => {
-    // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
-    config.data = Qs.stringify(config.data);
-    config.headers = {
-      'Content-Type':'application/x-www-form-urlencoded,charset=utf-8',
+    const username = window.localStorage.getItem('ms_username');
+    const userkey = window.localStorage.getItem('ms_userkey');
+    if(config.method === 'OPTIONS'){
+      console.log("拦截器"+config.method );
     }
-    console.log(userkey);
-    config.headers.Authorization = userkey+"|"+username;
-    // if(token){
-    //   config.params = {'token':token}
-    // }
+    // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
+    if(config.method === 'post'|| config.method ==="get" ) {
+      config.data = Qs.stringify(config.data);
+      config.headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin':'*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+        'Authorization':'bearer' + ' ' + userkey+'|'+username
+      }
+      console.log("拦截器");
+      console.log(userkey+"|"+username);
+    }
     return config;
   },
   error => {
@@ -31,7 +38,7 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
   response => {
-    if(response.data.errCode ==2){
+    if(response.data.errCode ==2||response.data.errCode==401){
       router.push({
         path:"/login",
         querry:{redirect:router.currentRoute.fullPath}//从哪个页面跳转

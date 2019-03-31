@@ -51,12 +51,12 @@ export default {
                         {
                             icon: "el-icon-setting",
                             index: "role",
-                            title: "权限列表"
+                            title: "角色列表"
                         },
                         {
                             icon: "el-icon-setting",
                             index: "rights",
-                            title: "功能列表"
+                            title: "权限列表"
                         }
                     ]
                 },

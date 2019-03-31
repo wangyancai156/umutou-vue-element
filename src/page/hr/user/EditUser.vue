@@ -4,7 +4,7 @@
             <div class="form-box">
                 <el-form ref="form" :model="form" label-width="80px">
                     <el-form-item label="部门">
-                        <el-cascader :options="form.organization.data" @change="oncascaderChang"></el-cascader>
+                        <el-cascader :options="form.organization.data" v-model="form.organization.val"  @change="oncascaderChang"   ></el-cascader>
                     </el-form-item>
                     <el-form-item label="姓名">
                         <el-input v-model="form.name"></el-input>
@@ -27,13 +27,15 @@ export default {
     data: function() {
         return {
             form: {
+                Id:"",
                 name: "",
                 description: "",
                 telephone: "",
                 organization: {
-                    val: "",
+                    val: [],
                     data: []
-                }
+                },
+                userPwd:""
             }
         };
     },
@@ -44,6 +46,21 @@ export default {
         //初始化页面
         initialization() {
             this.getOrganization();
+            this.getQuery();
+        },
+        //获取传值
+        getQuery() {
+            this.form.Id = this.$route.query.model.Id;
+            this.form.name = this.$route.query.model.UserName;
+            this.form.telephone = this.$route.query.model.Telephone;
+            this.form.organization.val.length = 0;
+            var arr3 = new Array(this.$route.query.model.Organization[0].OrganizationIdList.length);
+            this.$route.query.model.Organization[0].OrganizationIdList.forEach(element => {
+                this.form.organization.val.push(element);
+            });
+           
+            this.form.userPwd = this.$route.query.model.UserPwd;
+            console.log(this.form.organization.val);
         },
         //获取组织架构
         getOrganization() {
@@ -55,17 +72,19 @@ export default {
         },
         oncascaderChang(key) {
             var keyid = key[key.length - 1];
-            this.form.organization.val = keyid;
+           
+            this.form.organization.val  = key;
+            
         },
         //提交
         onSubmit() {
             this.$http
-                .get("/api/Users/AddUsers", {
+                .get("/api/Users/UpdateUsers", {
                     params: {
-                        Id: "",
+                        Id: this.form.Id,
                         Name: this.form.name,
-                        Pwd: "111111",
-                        Organizationid: this.form.organization.val,
+                        Pwd: this.form.userPwd,
+                        Organizationid: this.form.organization.val[this.form.organization.val.length-1],
                         Telephone: this.form.telephone
                     }
                 })

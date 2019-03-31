@@ -4,6 +4,8 @@ import apiConfig from '../config/api.config'
 import Axios from 'axios';
 import VueAxios from 'vue-axios';
 import Vuex from 'vuex'
+Axios.defaults.withCredentials = true;
+
 
 import router from './router';
 import VueRouter from 'vue-router';
@@ -24,16 +26,19 @@ Axios.defaults.baseURL = apiConfig.baseUrl;
 Vue.use(Vuex)
 Vue.use(VueRouter);
 Vue.use(ElementUI, { size: 'small' });
- 
+
+
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {
-
-    const username = localStorage.getItem('ms_username');
-    const userkey = localStorage.getItem('ms_userkey');
-  
+    
+    const username = window.localStorage.getItem('ms_username');
+    const userkey = window.localStorage.getItem('ms_userkey');
     if ((!username || !userkey) && to.path !== '/login') {
         next('/login');
     } else {
+       
+        console.log("验证时要钥匙");
+        console.log(userkey);
         next();
         /** 
         if (to.path == '/login') {

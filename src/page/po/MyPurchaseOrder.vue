@@ -19,7 +19,7 @@
             </el-table-column>
             <el-table-column prop="PaymentType.Name" label="付款方案" style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="CreateUserId" label="操作人" style="width: 20%; ">
+            <el-table-column prop="CreateUser.UserName" label="申请人" style="width: 20%; ">
             </el-table-column>
             <el-table-column prop="CreateDate" label="操作时间" :formatter="dateFormat" style="width: 20%; ">
             </el-table-column>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -79,14 +80,16 @@ export default {
                     params: {
                         PageIndex: this.PageIndex,
                         PageSize: this.Pagesize,
-                        StatuId: this.Status.val
+                        StatuId: this.Status.val,
+                        OperatorId:"W001"
                     }
                 })
                 .then(res => {
+                    console.log(res.data);
                     this.table = res.data.EntityList;
                     this.TotalCount = res.data.TotalCount;
                     this.PageIndex = res.data.PageIndex;
-                    console.log(res.data.EntityList);
+                  
                 });
         },
         selsChange(sels) {
@@ -138,6 +141,7 @@ export default {
                 });
         },
         dateFormat: function(row, column) {
+           
             var date = row[column.property];
             if (date == undefined) {
                 return "";

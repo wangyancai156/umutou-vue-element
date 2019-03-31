@@ -13,8 +13,7 @@ const editorganization = r => require.ensure([], () => r(require('@/page/hr/orga
 const role = r => require.ensure([], () => r(require('@/page/hr/role/Role')), 'role');
 const addrole = r => require.ensure([], () => r(require('@/page/hr/role/AddRole')), 'addrole');
 const editrole = r => require.ensure([], () => r(require('@/page/hr/role/EditRole')), 'editrole');
-const relationrights = r => require.ensure([], () => r(require('@/page/hr/role/RelationRights')), 'relationrights');
-const addrelationrights = r => require.ensure([], () => r(require('@/page/hr/role/AddRelationRights')), 'addrelationrights');
+ 
 //权限
 const rights = r => require.ensure([], () => r(require('@/page/hr/rights/Rights')), 'rights');
 const addrights = r => require.ensure([], () => r(require('@/page/hr/rights/AddRights')), 'addrights');
@@ -22,6 +21,7 @@ const editrights = r => require.ensure([], () => r(require('@/page/hr/rights/Edi
 //用户
 const user = r => require.ensure([], () => r(require('@/page/hr/user/User')), 'user');
 const adduser = r => require.ensure([], () => r(require('@/page/hr/user/AddUser')), 'adduser');
+const editruser = r => require.ensure([], () => r(require('@/page/hr/user/EditUser')), 'editruser');
 //库存
 const inoutbound = r => require.ensure([], () => r(require('@/page/bw/InOutBound')), 'inoutbound');
 const spotinventory = r => require.ensure([], () => r(require('@/page/bw/SpotInventory')), 'spotinventory');
@@ -77,46 +77,41 @@ export default new Router({
                             meta: { title: '新建员工' },
                         },
                         {
+                            path: '/editruser',
+                            component: editruser,
+                            meta: { title: '编辑员工' },
+                        },
+                        {
                             path: '/rights',
                             component: rights,
-                            meta: { title: '功能列表' },
+                            meta: { title: '权限列表' },
                         },
                         {
                             path: '/addrights',
                             name: 'addRights',
                             component: addrights,
-                            meta: { title: '添加功能' },
+                            meta: { title: '添加权限' },
                         },
                         {
                             path: '/editrights',
                             name: 'editrights',
                             component: editrights,
-                            meta: { title: '编辑功能' },
+                            meta: { title: '编辑权限' },
                         },
                         {
                             path: '/role',
                             component: role,
-                            meta: { title: '权限列表' },
+                            meta: { title: '角色列表' },
                         },
                         {
                             path: '/addrole',
                             component: addrole,
-                            meta: { title: '添加权限' },
+                            meta: { title: '添加角色' },
                         },
                         {
                             path: '/editrole',
                             component: editrole,
-                            meta: { title: '编辑权限' },
-                        },
-                        {
-                            path: '/relationrights',
-                            component: relationrights,
-                            meta: { title: '岗位功能' },
-                        },
-                        {
-                            path: '/addrelationrights',
-                            component: addrelationrights,
-                            meta: { title: '关联功能' },
+                            meta: { title: '编辑角色' },
                         },
                         {
                             path: '/spotinventory',

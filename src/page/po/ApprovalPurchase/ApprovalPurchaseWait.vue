@@ -9,7 +9,7 @@
             </el-table-column>
             <el-table-column prop="PaymentType.Name" label="付款方案" style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="CreateUserId" label="操作人" style="width: 20%; ">
+            <el-table-column prop="CreateUser.UserName" label="申请人" style="width: 20%; ">
             </el-table-column>
             <el-table-column prop="CreateDate" label="操作时间" :formatter="dateFormat" style="width: 20%; ">
             </el-table-column>

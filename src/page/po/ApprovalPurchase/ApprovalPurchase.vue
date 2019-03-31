@@ -8,7 +8,7 @@
                 <v-HaveApproval  v-bind:status="'PO-030'"></v-HaveApproval>
             </el-tab-pane>
             <el-tab-pane label="已驳回" name="third">
-                <v-HaveApproval  v-bind:status="'PO-021'"></v-HaveApproval>
+                <v-HaveApproval  v-bind:status="'PO-040'"></v-HaveApproval>
             </el-tab-pane>
         </el-tabs>
     </div>
