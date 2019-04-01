@@ -34,6 +34,7 @@ export default {
         return {
             collapse: false,
              items: [
+                /**
                 {
                     icon: "el-icon-date",
                     index: "1",
@@ -179,7 +180,8 @@ export default {
                     icon: "el-icon-error",
                     index: "404",
                     title: "404页面"
-                }
+                } 
+                */
             ]
         };
     },
@@ -189,22 +191,25 @@ export default {
         }
     },
     created() {
-        // 通过 Event Bus 进行组件间通信，来折叠侧边栏
-        bus.$on("collapse", msg => {
-            this.collapse = msg;
-        });
-         this.initialization();
+       
+        this.initialization();
     },
     methods: {
 
         initialization(){
-             this.getMenu();
+            //获取菜单
+            this.getMenu();
+            // 通过 Event Bus 进行组件间通信，来折叠侧边栏
+            bus.$on("collapse", msg => {
+                this.collapse = msg;
+            });
         },
         getMenu(){
+            var username = window.localStorage.getItem('ms_username');
             this.$http
             .get("/api/Rights/GetMenuView", {
                 params: {
-                    userId: "W005"
+                    userId: username
                 }
             })
             .then(res => {
