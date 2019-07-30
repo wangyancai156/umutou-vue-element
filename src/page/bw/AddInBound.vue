@@ -6,7 +6,7 @@
                     <el-form-item label="库房">
                         <el-select v-model="Warehouse.val" clearable placeholder="请选择库房" @change="getWarehouseShelf" class="handle-select mr10" style="width:150px">
                             <el-option v-for="item in Warehouse.data" :key="item.Id" :label="item.Name" :value="item.Id"></el-option>
-                        </el-select>
+                        </el-select> 
                     </el-form-item>
                     <el-form-item label="货架">
                         <el-select v-model="WarehouseShelf.val" clearable placeholder="请选择货架" class="handle-select mr10" style="width:150px">
