@@ -213,10 +213,10 @@ export default {
                 }
             })
             .then(res => {
-                 this.items.length = 0;
-                this.items =  res.data[0].children;
                 console.log("菜单");
-                console.log(res.data[0].children);
+                console.log(res.data);
+                this.items.length = 0;
+                this.items =  res.data[0].children;
                 console.log(this.items);
             });
         }

@@ -46,11 +46,11 @@ export default {
               }
             })
             .then(res => {
-              if (res.data.Result) {
+              if (res.data.code == 200 ) {
                 window.localStorage.setItem("ms_username", this.ruleForm.username);
-                window.localStorage.setItem("ms_userkey", res.data.SessionKey);
+                window.localStorage.setItem("ms_userkey", res.data.token);
                 console.log("登陆后钥匙");
-                console.log( res.data.SessionKey);
+                console.log( res.data.token);
                 const userkey = window.localStorage.getItem('ms_userkey');
                 console.log("登陆后保存钥匙");
                 console.log(userkey);
