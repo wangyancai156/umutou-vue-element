@@ -19,9 +19,9 @@ axios.interceptors.request.use(
       config.data = Qs.stringify(config.data);
       config.headers = {
         'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
         'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
         'Authorization':'bearer' + ' ' + userkey+'|'+username
       }
       console.log("拦截器");

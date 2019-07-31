@@ -4,7 +4,7 @@ import apiConfig from '../config/api.config'
 import Axios from 'axios';
 import VueAxios from 'vue-axios';
 import Vuex from 'vuex'
-Axios.defaults.withCredentials = true;
+Axios.defaults.withCredentials = false;
 
 
 import router from './router';
