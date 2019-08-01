@@ -205,20 +205,9 @@ export default {
             });
         },
         getMenu(){
-            var username = window.localStorage.getItem('ms_username');
-            this.$http
-            .get("/api/Rights/GetMenuView", {
-                params: {
-                    userId: username
-                }
-            })
-            .then(res => {
-                console.log("菜单");
-                console.log(res.data);
-                this.items.length = 0;
-                this.items =  res.data[0].children;
-                console.log(this.items);
-            });
+            var usermenu = JSON.parse(window.localStorage.getItem('ms_usermenu'));
+            this.items.length = 0;
+            this.items = usermenu;
         }
     }
 };

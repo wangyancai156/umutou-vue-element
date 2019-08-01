@@ -12,7 +12,7 @@
             </el-table-column>
             <el-table-column prop="Qty" label="数量"  style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="Price" label="单价"  style="width: 20%; ">
+            <el-table-column prop="Price" label="成本"  style="width: 20%; ">
             </el-table-column>
             <el-table-column   label="操作" style="width: 5%; ">
                 <template slot-scope="scope">
@@ -91,21 +91,20 @@ export default {
         },
         getSpotInventory() {
 
-
-        this.$http.get("/api/SpotInventory/GetSpotInventory", {
-                    params: {
-                        PageIndex: this.PageIndex,
-                        PageSize: this.pagesize,
-                        ProductId: "",
-                        WarehouseId: ""
-                    }
-                })
-                .then(res => {
-                    this.table = res.data.EntityList;
-                    this.TotalCount = res.data.TotalCount;
-                    this.PageIndex = res.data.PageIndex;
-                    console.log(res.data.EntityList);
-                });
+            this.$http.get("/api/SpotInventory/GetSpotInventory", {
+                        params: {
+                            PageIndex: this.PageIndex,
+                            PageSize: this.pagesize,
+                            ProductId: "",
+                            WarehouseId: ""
+                        }
+                    })
+                    .then(res => {
+                        this.table = res.data.EntityList;
+                        this.TotalCount = res.data.TotalCount;
+                        this.PageIndex = res.data.PageIndex;
+                        console.log(res.data.EntityList);
+                    });
         },
         getInOutReason() {
             this.$http.get("/api/InOutReason/GetOutReason", {}).then(res => {
