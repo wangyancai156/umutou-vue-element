@@ -41,7 +41,7 @@
 </template>
 
 <script>
-
+import { moment } from "@/components/common/moment.js";
 export default {
     data() {
         return {
@@ -85,10 +85,11 @@ export default {
                     }
                 })
                 .then(res => {
-                    console.log(res.data);
-                    this.table = res.data.EntityList;
-                    this.TotalCount = res.data.TotalCount;
-                    this.PageIndex = res.data.PageIndex;
+                    let{EntityList,TotalCount,PageIndex } = res.data;
+                    console.log(EntityList);
+                    this.table =  EntityList;
+                    this.TotalCount =  TotalCount;
+                    this.PageIndex =  PageIndex;
                   
                 });
         },

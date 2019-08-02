@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="handle-box">
-            <el-button type="primary" icon="delete" class="handle-del mr10" style=" width:80px;">入库</el-button>
+            <el-button type="primary" icon="delete" class="handle-del mr10" style=" width:80px;" @click="inBound">入库</el-button>
         </div>
         <el-table :data="table" style="width: 100%; ">
             <el-table-column type="selection" style="width: 5%; ">
@@ -138,6 +138,9 @@ export default {
                     this.Id = "";
                     this.getSpotInventory();
                 });
+        },
+        inBound(){
+            this.$router.push({ path: "addinbound", query: { parentid: this.id} });
         }
     }
 };
