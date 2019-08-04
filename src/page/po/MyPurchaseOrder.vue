@@ -21,7 +21,7 @@
             </el-table-column>
             <el-table-column prop="CreateUser.UserName" label="申请人" style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="CreateDate" label="操作时间" :formatter="dateFormat" style="width: 20%; ">
+            <el-table-column prop="CreateDate" label="操作时间"   style="width: 20%; ">
             </el-table-column>
             <el-table-column label="操作" style="width: 5%; ">
                 <template slot-scope="scope">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { moment } from "../../components/common/moment.js";
+
 export default {
     data() {
         return {
@@ -75,13 +75,14 @@ export default {
             this.getPurchaseOrderView();
         },
         getPurchaseOrderView() {
+            const operatorId = window.localStorage.getItem('ms_username');
             this.$http
                 .get("/api/PurchaseOrder/getPurchaseOrderViewByStatus", {
                     params: {
                         PageIndex: this.PageIndex,
                         PageSize: this.Pagesize,
                         StatuId: this.Status.val,
-                        OperatorId:"W001"
+                        OperatorId:operatorId
                     }
                 })
                 .then(res => {
@@ -142,12 +143,16 @@ export default {
                 });
         },
         dateFormat: function(row, column) {
-           
-            var date = row[column.property];
-            if (date == undefined) {
+         
+            var time = row[column.property];
+            console.log(time);
+            if (time == undefined) {
                 return "";
             }
-            return moment(date).format("YYYY-MM-DD HH:mm:ss");
+            var date = JSON.parse(time);
+             console.log(date);
+          //  return moment(date).format("YYYY-MM-DD HH:mm:ss");
+            return dateFormat(time);
         }
     }
 };

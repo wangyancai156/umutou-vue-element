@@ -84,6 +84,7 @@ export default {
                 });
         },
         onSubmit() {
+            const operatorId = window.localStorage.getItem('ms_username');
             this.$http
                 .get("/api/PurchaseOrder/AddPurchaseOrder", {
                     params: {
@@ -91,7 +92,7 @@ export default {
                         SupplierId: this.Supplier.val,
                         PaymentTypeId: this.PaymentType.val,
                         Note: "",
-                        CreateUserId: "W001"
+                        CreateUserId: operatorId
                     }
                 })
                 .then(res => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import apiConfig from '../../config/api.config'
 import Qs from 'qs';
 
-axios.defaults.timeout = 5000;
+axios.defaults.timeout = 50000;
 axios.defaults.baseURL = apiConfig.baseUrl;
 
 //http request 拦截器
