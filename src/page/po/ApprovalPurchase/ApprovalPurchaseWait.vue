@@ -74,11 +74,13 @@ export default {
                 });
         },
         onPurchaseApproval(row) {
+
+            const operatorId = window.localStorage.getItem('ms_username');
             this.$http
                 .get("/api/PurchaseOrder/PurchaseApproval", {
                     params: {
                         id: row.Id,
-                        operatorId: "W001"
+                        operatorId: operatorId
                     }
                 })
                 .then(res => {
@@ -86,11 +88,13 @@ export default {
                 });
         },
         onPurchaseReject(row) {
+
+            const operatorId = window.localStorage.getItem('ms_username');
             this.$http
                 .get("/api/PurchaseOrder/PurchaseReject", {
                     params: {
                         id: row.Id,
-                        operatorId: "W001"
+                        operatorId: operatorId
                     }
                 })
                 .then(res => {
@@ -102,7 +106,7 @@ export default {
             if (date == undefined) {
                 return "";
             }
-            return moment(date).format("YYYY-MM-DD HH:mm:ss");
+            return date.substring(0,10);
         }
     }
 };

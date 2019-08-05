@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { moment } from "@/components/common/moment.js";
+
 export default {
     data() {
         return {
@@ -103,7 +103,7 @@ export default {
             if (date == undefined) {
                 return "";
             }
-            return moment(date).format("YYYY-MM-DD HH:mm:ss");
+            return date.substring(0,10);
         }
     }
 };

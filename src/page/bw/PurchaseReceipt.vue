@@ -11,7 +11,7 @@
             </el-table-column>
             <el-table-column prop="PaymentType.Name" label="付款方案" style="width: 20%; ">
             </el-table-column>
-            <el-table-column prop="CreateUserId" label="操作人" style="width: 20%; ">
+            <el-table-column prop="CreateUser.UserName" label="请购人" style="width: 20%; ">
             </el-table-column>
             <el-table-column prop="CreateDate" label="操作时间" :formatter="dateFormat" style="width: 20%; ">
             </el-table-column>
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import { moment } from "@/components/common/moment.js";
 export default {
     data() {
         return {
             Pagesize: 10,
             PageIndex: 1,
             TotalCount: 0,
+            status: "PO-030",
             table: []
         };
     },
@@ -46,24 +46,28 @@ export default {
         this.initialization();
     },
     methods: {
+        //初始化
         initialization() {
             this.getPurchaseNoticeView();
         },
+        //设置页数
         handleSizeChange: function(size) {
             this.Pagesize = size;
             this.getPurchaseNoticeView();
         },
+        //翻页
         handleCurrentChange: function(PageIndex) {
             this.PageIndex = PageIndex;
             this.getPurchaseNoticeView();
         },
+        //获取数据
         getPurchaseNoticeView() {
             this.$http
                 .get("/api/PurchaseOrder/getPurchaseOrderViewByStatus", {
                     params: {
                         PageIndex: this.PageIndex,
                         PageSize: this.Pagesize,
-                        StatuId: this.Status.val
+                        StatuId: this.status
                     }
                 })
                 .then(res => {
@@ -77,7 +81,7 @@ export default {
             //被选中的行组成数组
             this.sels = sels;
         },
-        addPurchaseOrder() {
+        inBound() {
             this.$router.push("addpurchaseorder");
         },
         dateFormat: function(row, column) {
@@ -85,7 +89,7 @@ export default {
             if (date == undefined) {
                 return "";
             }
-            return moment(date).format("YYYY-MM-DD HH:mm:ss");
+            return date.substring(0,10);
         }
     }
 };

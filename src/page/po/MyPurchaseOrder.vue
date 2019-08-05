@@ -143,16 +143,11 @@ export default {
                 });
         },
         dateFormat: function(row, column) {
-         
-            var time = row[column.property];
-            console.log(time);
-            if (time == undefined) {
+          var date = row[column.property];
+            if (date == undefined) {
                 return "";
             }
-            var date = JSON.parse(time);
-             console.log(date);
-          //  return moment(date).format("YYYY-MM-DD HH:mm:ss");
-            return dateFormat(time);
+            return date.substring(0,10);
         }
     }
 };

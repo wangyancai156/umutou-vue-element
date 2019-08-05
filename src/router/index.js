@@ -26,6 +26,8 @@ const editruser = r => require.ensure([], () => r(require('@/page/hr/user/EditUs
 const inoutbound = r => require.ensure([], () => r(require('@/page/bw/InOutBound')), 'inoutbound');
 const spotinventory = r => require.ensure([], () => r(require('@/page/bw/SpotInventory')), 'spotinventory');
 const addinbound = r => require.ensure([], () => r(require('@/page/bw/AddInBound')), 'addinbound');
+const purchasereceipt = r => require.ensure([], () => r(require('@/page/bw/PurchaseReceipt')), 'purchasereceipt');
+
 //采购
 const mypurchaseorder = r => require.ensure([], () => r(require('@/page/po/MyPurchaseOrder')), 'mypurchaseorder');
 const addpurchaseorder = r => require.ensure([], () => r(require('@/page/po/AddPurchaseOrder')), 'addpurchaseorder');
@@ -122,6 +124,11 @@ export default new Router({
                             path: '/addinbound',
                             component: addinbound,
                             meta: { title: '添加入库' }
+                        },
+                        {
+                            path: '/purchasereceipt',
+                            component: purchasereceipt,
+                            meta: { title: '待到货' }
                         },
                         {
                             path: '/mypurchaseorder',
