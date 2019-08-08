@@ -5,12 +5,11 @@ import Axios from 'axios';
 import VueAxios from 'vue-axios';
 import './assets/iconfont/iconfont.css'; //iconfont 图标
 import Vuex from 'vuex'
-Axios.defaults.withCredentials = false;
+//Axios.defaults.withCredentials = false;
 
-
-import router from './router';
-import VueRouter from 'vue-router';
-import ElementUI from 'element-ui';
+import router from './router'; //路由
+import VueRouter from 'vue-router'; // VUE 路由
+import ElementUI from 'element-ui'; //ui
 import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 import "babel-polyfill";
 import { post, fetch, patch, put } from './api/htttpk';
@@ -24,6 +23,7 @@ Vue.prototype.$put = put;
 //Vue.use(a)
 Vue.use(VueAxios, Axios);
 Axios.defaults.baseURL = apiConfig.baseUrl;
+Axios.defaults.timeout = 50000;
 Vue.use(Vuex)
 Vue.use(VueRouter);
 Vue.use(ElementUI, { size: 'small' });
@@ -38,6 +38,9 @@ router.beforeEach((to, from, next) => {
         console.log("无钥匙");
         next('/login');
     } else {
+
+
+        //以下功能可以通过axios.interceptors.response.use  拦截器来实现；
         console.log("验证时要钥匙");
         if (to.path == '/login') {
             next();

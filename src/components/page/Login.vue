@@ -23,7 +23,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
-        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 请输入用户名和密码。</p>
+        <p style="font-size:12px;line-height:30px;color:#999;">提示 : 请输入用户名和密码。</p>
       </el-form>
     </div>
   </div>
