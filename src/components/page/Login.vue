@@ -23,7 +23,7 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
-        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>
+        <p style="font-size:12px;line-height:30px;color:#999;">Tips : 请输入用户名和密码。</p>
       </el-form>
     </div>
   </div>
@@ -59,16 +59,12 @@ export default {
             .then(res => {
               let { User, token, code } = res.data;
               if (code == 200) {
-                console.log(User.Menu);
                 window.localStorage.setItem("ms_username", User.Id);
                 window.localStorage.setItem("ms_userkey", token);
-                var menu =JSON.stringify(User.Menu[0].children);
+                var menu = JSON.stringify(User.Menu[0].children);
                 window.localStorage.setItem("ms_usermenu", menu);
-                console.log("登陆后用户");
-                console.log(User.Id);
-                console.log("登陆后钥匙");
-                console.log(token);
                 this.$router.push("/");
+                console.log(User.Menu);
               }
             });
         } else {
