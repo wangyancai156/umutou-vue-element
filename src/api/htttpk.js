@@ -1,6 +1,7 @@
 import axios from 'axios';
 import apiConfig from '../../config/api.config'
 import Qs from 'qs';
+import router from './../router'; //路由
 
 //axios.defaults.timeout = 50000;
 //axios.defaults.baseURL = apiConfig.baseUrl;
@@ -24,12 +25,14 @@ axios.interceptors.request.use(
                 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, PATCH, DELETE',
                 'Authorization': 'bearer' + ' ' + userkey + '|' + username
             }
-            console.log("拦截器");
+            console.log("拦截器S");
             console.log(userkey + "|" + username);
         }
         return config;
     },
     error => {
+        error.method;
+        console.log("拦截错误");
         return Promise.reject(err);
     }
 );
@@ -37,18 +40,24 @@ axios.interceptors.request.use(
 //http response 拦截器
 axios.interceptors.response.use(
     response => {
-        if (response.data.errCode == 2 || response.data.errCode == 401) {
-            router.push({
-                path: "/login",
-                querry: { redirect: router.currentRoute.fullPath }//从哪个页面跳转
-            })
-        }
         return response;
     },
     error => {
-        return Promise.reject(error)
+        console.log("拦截器返回");
+        console.log(error.response.status);
+        if (error.response) {
+            switch (error.response.status) {
+                case 401: // 返回 401 清除token信息并跳转到登录页面
+                    router.push({
+                        path: '/login',
+                        // query: {redirect: router.currentRoute.fullPath}//登录成功后跳入浏览的当前页面
+                    })
+            }
+        }
+        return Promise.reject(error)   // 返回接口返回的错误信息
     }
-)
+);
+
 
 
 /**

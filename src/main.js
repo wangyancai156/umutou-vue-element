@@ -39,26 +39,8 @@ router.beforeEach((to, from, next) => {
         next('/login');
     } else {
 
-
+        next();
         //以下功能可以通过axios.interceptors.response.use  拦截器来实现；
-        console.log("验证时要钥匙");
-        if (to.path == '/login') {
-            next();
-        } else {
-            Axios.get("/api/Account/Verification", {
-                params: {
-                    UserId: username, Userkey: userkey
-                }
-            }).then(res => {
-                if (!res.data && to.path !== '/login') {
-                    console.log("错误");
-                    next('/login');
-                } else {
-                    console.log("正确");
-                    next();
-                }
-            });
-        }
         /** 
         if (to.path == '/login') {
             next();
