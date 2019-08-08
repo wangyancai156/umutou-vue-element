@@ -61,10 +61,20 @@ export default {
               if (code == 200) {
                 window.localStorage.setItem("ms_username", User.Id);
                 window.localStorage.setItem("ms_userkey", token);
-                var menu = JSON.stringify(User.Menu[0].children);
-                window.localStorage.setItem("ms_usermenu", menu);
-                this.$router.push("/");
-                console.log(User.Menu);
+                window.localStorage.setItem(
+                  "ms_usermenu",
+                  JSON.stringify(User.Menu[0].children)
+                );
+
+                //登录之后 获取是否有之前的请求页面，如果有则调到这个页面，如果没有这进入主页面
+                var redirect = this.$route.query.redirect;
+                if (redirect) {
+                  this.$router.push(redirect);
+                } else {
+                  this.$router.push("/");
+                }
+                console.log("redirect");
+                console.log(redirect);
               }
             });
         } else {

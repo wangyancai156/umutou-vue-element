@@ -48,9 +48,9 @@ axios.interceptors.response.use(
         if (error.response) {
             switch (error.response.status) {
                 case 401: // 返回 401 清除token信息并跳转到登录页面
-                    router.push({
+                    router.replace({
                         path: '/login',
-                        // query: {redirect: router.currentRoute.fullPath}//登录成功后跳入浏览的当前页面
+                        query: { redirect: router.currentRoute.fullPath }//登录成功后跳入浏览的当前页面
                     })
             }
         }
