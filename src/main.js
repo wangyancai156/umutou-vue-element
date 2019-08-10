@@ -28,6 +28,9 @@ Vue.use(Vuex)
 Vue.use(VueRouter);
 Vue.use(ElementUI, { size: 'small' });
 
+import common from './components/common.js'
+Vue.use(common);
+
 
 //使用钩子函数对路由进行权限跳转
 router.beforeEach((to, from, next) => {

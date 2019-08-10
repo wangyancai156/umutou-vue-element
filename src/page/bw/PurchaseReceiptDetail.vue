@@ -1,21 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <div class="handle-box">
-                <el-button type="primary" @click="onSubmit">入库</el-button>
-                <el-button @click="onCancel">返回</el-button>
-            </div>
-            <el-table ref="list" @selection-change="selsChange" :data="table" style="width: 100%; ">
-                <el-table-column type="selection">
-                </el-table-column>
-                <el-table-column prop="Product.ChineseName" label="产品名称">
-                </el-table-column>
-                <el-table-column prop="UnitPrice" label="单价">
-                </el-table-column>
-                <el-table-column prop="Qty" label="数量">
-                </el-table-column>
-            </el-table>
-
+            asd 
         </div>
     </div>
 </template>

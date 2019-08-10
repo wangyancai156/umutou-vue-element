@@ -24,7 +24,7 @@
             </el-table-column>
         </el-table>
         <div class="block">
-            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="PageIndex" :page-sizes="[5, 10, 20, 100]" :page-size="Pagesize" layout="total, sizes, prev, pager, next, jumper" :total="TotalCount">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="PageIndex" :page-sizes="[5, 10, 20, 50, 100]" :page-size="Pagesize" layout="total, sizes, prev, pager, next, jumper" :total="TotalCount">
             </el-pagination>
         </div>
 
@@ -81,15 +81,14 @@ export default {
             //被选中的行组成数组
             this.sels = sels;
         },
+        //出库
         inBound() {
-            this.$router.push("addpurchaseorder");
+            this.$router.push("AddInBound");
         },
+        //格式化日期
         dateFormat: function(row, column) {
             var date = row[column.property];
-            if (date == undefined) {
-                return "";
-            }
-            return date.substring(0,10);
+           return this.DateFormat(date);
         }
     }
 };
