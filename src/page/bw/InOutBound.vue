@@ -22,47 +22,46 @@
                         <el-input v-model="form.Description"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button type="primary" @click="onSubmit">提交</el-button>
+                        <el-button type="primary" @click="onSubmit"
+                            >提交</el-button
+                        >
                         <el-button>取消</el-button>
                     </el-form-item>
                 </el-form>
             </div>
         </div>
-
     </div>
-</template>
+</template> 
 
 <script>
-    export default {
-        data: function(){
-            return {
-                form: {
-                    ParentId:'',
-                    Name: '',
-                    Description: '',
-                }
+export default {
+    data: function() {
+        return {
+            form: {
+                ParentId: "",
+                Name: "",
+                Description: ""
             }
-        },
-        activated(){
-            this.form.ParentId = this.$route.query.parentid;
-            console.log( this.$route.query );
-        },
-        methods: {
-            onSubmit() {
-                this.$http
+        };
+    },
+    activated() {
+        this.form.ParentId = this.$route.query.parentid;
+        console.log(this.$route.query);
+    },
+    methods: {
+        onSubmit() {
+            this.$http
                 .get("/api/Organization/AddOrganization", {
-                params: {  
-                        ParentId:this.form.ParentId,
-                        Name:this.form.Name,
-                        Description:this.form.Description,
-                        }
+                    params: {
+                        ParentId: this.form.ParentId,
+                        Name: this.form.Name,
+                        Description: this.form.Description
+                    }
                 })
                 .then(res => {
-                  
-                     this.$router.push('organization');
+                    this.$router.push("organization");
                 });
-           }
-
         }
     }
+};
 </script>

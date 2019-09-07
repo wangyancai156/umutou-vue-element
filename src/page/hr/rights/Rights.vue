@@ -1,32 +1,31 @@
 <template>
-    <div class="container">
-        <div class="handle-box">
-            <el-button v-if="inquireParent" type="primary" icon="el-icon-back"  @click="inquireParentNode()" class="handle-del mr10" >返回上一级</el-button>
-            <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteNode()"> 批量删除</el-button>
-            <el-button type="primary" icon="delete" class="handle-del mr10" @click="add"> 添加功能 </el-button>
-        </div>
-        <el-table ref="list" @selection-change="selsChange"  :data="table" style="width: 100%; " >
-            <el-table-column type="selection"  >
-            </el-table-column>
-            <el-table-column prop="Name" label="名称" style="withd:100px;" >
-            </el-table-column>
-            <el-table-column prop="Level" label="等级">
-            </el-table-column>
-            <el-table-column prop="Url" label="链接">
-            </el-table-column>
-            <el-table-column prop="CreateDate" label="添加时间">
-            </el-table-column>
-            <el-table-column prop="Description" label="说明">
-            </el-table-column>
-            <el-table-column  label="操作">
-                <template slot-scope="scope">
-                    <el-button size="small" @click="edit(scope.row)"  >编辑</el-button>
-                    <el-button size="small" type="primary" @click="inquireChildNode(scope.row)">子功能</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
+  <div class="container">
+    <div class="handle-box">
+      <el-button
+        v-if="inquireParent"
+        type="primary"
+        icon="el-icon-back"
+        @click="inquireParentNode()"
+        class="handle-del mr10"
+      >返回上一级</el-button>
+      <el-button type="danger" icon="delete" class="handle-del mr10" @click="deleteNode()">批量删除</el-button>
+      <el-button type="primary" icon="delete" class="handle-del mr10" @click="add">添加功能</el-button>
     </div>
-    
+    <el-table ref="list" @selection-change="selsChange" :data="table" style="width: 100%; ">
+      <el-table-column type="selection"></el-table-column>
+      <el-table-column prop="Name" label="名称" style="withd:100px;"></el-table-column>
+      <el-table-column prop="Level" label="等级"></el-table-column>
+      <el-table-column prop="Url" label="链接"></el-table-column>
+      <el-table-column prop="CreateDate" label="添加时间"></el-table-column>
+      <el-table-column prop="Description" label="说明"></el-table-column>
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button size="small" @click="edit(scope.row)">编辑</el-button>
+          <el-button size="small" type="primary" @click="inquireChildNode(scope.row)">子功能</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
@@ -99,7 +98,7 @@ export default {
       });
 
       this.$http
-        .get("/api/Organization/DeleteOrganization", {
+        .get("/api/Rights/DeleteRights", {
           params: {
             id: ids
           }
